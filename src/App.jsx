@@ -318,6 +318,8 @@ export default function App() {
     return () => clearInterval(interval)
   }, [])
 
+  // Achievements will be displayed in a scrollable container on small screens
+
   return (
     <div className="font-body">
 
@@ -740,24 +742,26 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {achievements.filter(item => item.image).map((item, i) => (
-              <article key={item.title}
-                className={`reveal card p-2 hover:-translate-y-2 delay-${i + 1}`}>
-                <a
-                  href={item.image}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)] p-2"
-                >
-                  <img
-                    src={item.image}
-                    alt="Certification image"
-                    className="w-full h-56 object-contain"
-                  />
-                </a>
-              </article>
-            ))}
+          <div className="max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {achievements.filter(item => item.image).map((item, i) => (
+                <article key={item.title}
+                  className={`reveal card p-2 hover:-translate-y-2 delay-${i + 1}`}>
+                  <a
+                    href={item.image}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block rounded-xl overflow-hidden border border-[var(--border)] bg-[var(--surface)] p-2"
+                  >
+                    <img
+                      src={item.image}
+                      alt="Certification image"
+                      className="w-full h-56 object-contain"
+                    />
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
