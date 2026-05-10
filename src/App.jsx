@@ -17,6 +17,8 @@ import {
   SunIcon,
   MoonIcon,
   SparklesIcon,
+  Bars3Icon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { CircleStackIcon as CircleStackSolid } from '@heroicons/react/24/solid'
 import { Squares2X2Icon as Squares2X2Solid } from '@heroicons/react/24/solid'
@@ -298,6 +300,7 @@ export default function App() {
   const [showTop, setShowTop] = useState(false)
   const [projectImageTick, setProjectImageTick] = useState(0)
   const [skillsTab, setSkillsTab] = useState(skillsTabs[0].key)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDark, setIsDark] = useState(() => {
     const s = localStorage.getItem('theme')
     return s ? s === 'dark' : true
@@ -323,6 +326,11 @@ export default function App() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [isMenuOpen])
+
   // Achievements will be displayed in a scrollable container on small screens
 
   return (
@@ -331,7 +339,17 @@ export default function App() {
       {/* ── NAVBAR ── */}
       <header className="navbar fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto w-full px-6 h-[68px] flex items-center justify-between">
-          <a href="#home" className="font-title text-xl font-black gradient-text tracking-wide">TeDev</a>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(true)}
+              aria-label="Open menu"
+              className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[var(--accent)] hover:bg-[rgba(99,102,241,0.1)] transition-all"
+            >
+              <Bars3Icon className="w-5 h-5"/>
+            </button>
+            <a href="#home" className="font-title text-xl font-black gradient-text tracking-wide">TeDev</a>
+          </div>
           <div className="flex items-center gap-3">
             <nav className="hidden md:flex items-center gap-7 pr-7">
               {['Home','About','Projects','Skills','Achievements','Contact'].map(link => (
@@ -356,8 +374,52 @@ export default function App() {
         </div>
       </header>
 
+      {/* ── MOBILE SIDEBAR ── */}
+      <div className={`mobile-nav ${isMenuOpen ? 'open' : ''}`} aria-hidden={!isMenuOpen}>
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="mobile-nav-backdrop"
+          onClick={() => setIsMenuOpen(false)}
+        />
+        <aside className="mobile-nav-panel" role="dialog" aria-modal="true">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)]">
+            <span className="font-title font-black text-lg gradient-text">TeDev</span>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setIsMenuOpen(false)}
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[var(--accent)] hover:bg-[rgba(99,102,241,0.1)] transition-all"
+            >
+              <XMarkIcon className="w-5 h-5"/>
+            </button>
+          </div>
+          <nav className="mobile-nav-links">
+            {['Home','About','Projects','Skills','Achievements','Contact'].map(link => (
+              <a
+                key={link}
+                href={`#${link.toLowerCase()}`}
+                className="mobile-nav-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link}
+              </a>
+            ))}
+          </nav>
+          <div className="px-5 pb-5">
+            <a
+              href="/Ted Paulo Feranil-Resume.pdf"
+              download="Ted Paulo Feranil-Resume.pdf"
+              className="btn-primary text-white text-sm font-bold px-5 py-2 rounded-lg w-full inline-flex justify-center"
+            >
+              Resume
+            </a>
+          </div>
+        </aside>
+      </div>
+
       {/* ── HERO ── */}
-      <section id="home" className="relative min-h-screen flex flex-col justify-center pt-16 overflow-hidden bg-[var(--surface-2)] hero-grid noise">
+      <section id="home" className="hero-section relative min-h-screen flex flex-col justify-center pt-24 md:pt-28 overflow-hidden bg-[var(--surface-2)] hero-grid noise">
         <div className="hero-blob hero-blob-1"/>
         <div className="hero-blob hero-blob-2"/>
 
@@ -384,7 +446,7 @@ export default function App() {
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 items-center gap-14">
           {/* Left */}
           <div>
-            <div className="reveal delay-1 inline-flex items-center gap-2 bg-[rgba(99,102,241,0.1)] border border-[rgba(99,102,241,0.25)] text-[var(--accent)] text-xs font-bold px-4 py-1.5 rounded-full mb-6 font-mono tracking-wide">
+            <div className="reveal delay-1 open-to-work inline-flex items-center gap-2 bg-[rgba(99,102,241,0.1)] border border-[rgba(99,102,241,0.25)] text-[var(--accent)] text-xs font-bold px-4 py-1.5 rounded-full mb-6 font-mono tracking-wide">
               <SparklesIcon className="w-3.5 h-3.5"/> Open to work
             </div>
             <h1 className="font-title reveal delay-2 text-5xl lg:text-7xl font-extrabold leading-[1.05] mb-3">
@@ -582,11 +644,12 @@ export default function App() {
                   <a
                     href="/Ted Paulo Feranil-Resume.pdf"
                     download="Ted Paulo Feranil-Resume.pdf"
-                    className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 z-30 inline-flex rounded-full bg-white p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:bg-[var(--surface-2)]"
+                    className="cv-download absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 z-30 inline-flex rounded-full bg-white p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:bg-[var(--surface-2)]"
                   >
-                    <div className="relative bg-[var(--accent)] hover:bg-[var(--accent-2)] text-white px-4 py-2 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-lg whitespace-nowrap">
-                      <ArrowDownTrayIcon className="w-3.5 h-3.5"/> Download my CV
-                      <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-3 border-b-3 border-r-3 border-t-transparent border-b-transparent border-r-[var(--accent)] group-hover:border-r-[var(--accent-2)]"/>
+                    <div className="cv-download-pill relative bg-[var(--accent)] hover:bg-[var(--accent-2)] text-white px-4 py-2 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-lg whitespace-nowrap">
+                      <ArrowDownTrayIcon className="cv-download-icon w-3.5 h-3.5"/>
+                      <span className="cv-download-label">Download my CV</span>
+                      <div className="cv-download-tail absolute -left-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-3 border-b-3 border-r-3 border-t-transparent border-b-transparent border-r-[var(--accent)] group-hover:border-r-[var(--accent-2)]"/>
                     </div>
                   </a>
                 </div>
@@ -609,54 +672,56 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, i) => (
-              <article key={project.title}
-                className={`reveal card overflow-hidden flex flex-col delay-${i + 1}`}>
-                {/* Thumbnail */}
-                <div className={`relative w-full aspect-video bg-gradient-to-br ${project.accent} flex items-center justify-center overflow-hidden`}>
-                  <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[rgba(99,102,241,0.3)] to-transparent pointer-events-none"/>
-                  {project.images?.length ? (
-                    <div className="absolute inset-0">
-                      <img
-                        src={project.images[projectImageTick % project.images.length]}
-                        alt={`${project.title} preview`}
-                        className="absolute inset-0 w-full h-full object-contain bg-[#0b1020]"
-                      />
+          <div className="max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, i) => (
+                <article key={project.title}
+                  className={`reveal card overflow-hidden flex flex-col delay-${i + 1}`}>
+                  {/* Thumbnail */}
+                  <div className={`relative w-full aspect-video bg-gradient-to-br ${project.accent} flex items-center justify-center overflow-hidden`}>
+                    <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[rgba(99,102,241,0.3)] to-transparent pointer-events-none"/>
+                    {project.images?.length ? (
+                      <div className="absolute inset-0">
+                        <img
+                          src={project.images[projectImageTick % project.images.length]}
+                          alt={`${project.title} preview`}
+                          className="absolute inset-0 w-full h-full object-contain bg-[#0b1020]"
+                        />
+                      </div>
+                    ) : (
+                      <span className="relative text-6xl opacity-50 select-none">{project.emoji}</span>
+                    )}
+                    <span className="absolute z-[2] bottom-2 left-3 font-mono text-[11px] text-white/50 bg-black/30 px-2 py-0.5 rounded-full">
+                      {project.status}
+                    </span>
+                  </div>
+                  {/* Body */}
+                  <div className="p-5 flex flex-col gap-3 flex-1">
+                    <h3 className="font-title font-bold text-base text-[var(--text)]">{project.title}</h3>
+                    <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.stack.map(s => (
+                        <span key={s} className="skill-pill bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.15)] text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
+                          {s}
+                        </span>
+                      ))}
                     </div>
-                  ) : (
-                    <span className="relative text-6xl opacity-50 select-none">{project.emoji}</span>
-                  )}
-                  <span className="absolute z-[2] bottom-2 left-3 font-mono text-[11px] text-white/50 bg-black/30 px-2 py-0.5 rounded-full">
-                    {project.status}
-                  </span>
-                </div>
-                {/* Body */}
-                <div className="p-5 flex flex-col gap-3 flex-1">
-                  <h3 className="font-title font-bold text-base text-[var(--text)]">{project.title}</h3>
-                  <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map(s => (
-                      <span key={s} className="skill-pill bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.15)] text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="border-t border-[var(--border)] pt-3 flex items-center gap-2">
-                    <a href={project.github} target="_blank" rel="noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(99,102,241,0.1)] hover:border-[rgba(99,102,241,0.4)] hover:text-[var(--accent)] transition-all">
-                      <GithubIcon className="w-4 h-4"/> GitHub
-                    </a>
-                    {project.visit ? (
-                      <a href={project.visit} target="_blank" rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(6,182,212,0.1)] hover:border-[rgba(6,182,212,0.4)] hover:text-[var(--accent-2)] transition-all">
-                        Visit
+                    <div className="border-t border-[var(--border)] pt-3 flex items-center gap-2">
+                      <a href={project.github} target="_blank" rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(99,102,241,0.1)] hover:border-[rgba(99,102,241,0.4)] hover:text-[var(--accent)] transition-all">
+                        <GithubIcon className="w-4 h-4"/> GitHub
                       </a>
-                    ) : null}
+                      {project.visit ? (
+                        <a href={project.visit} target="_blank" rel="noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(6,182,212,0.1)] hover:border-[rgba(6,182,212,0.4)] hover:text-[var(--accent-2)] transition-all">
+                          Visit
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
