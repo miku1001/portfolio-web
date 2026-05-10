@@ -104,7 +104,7 @@ const projects = [
       '/SupportIQ/login.jpg',
       '/SupportIQ/dashboard.jpg'
     ],
-    github: '#',
+    github: 'https://github.com/miku1001/SupportIQ',
     visit: 'https://support-iq-3pli.vercel.app/',
     accent: 'from-indigo-900/80 to-blue-900/80',
   },
@@ -134,6 +134,7 @@ const projects = [
       '/banana/banana_back.jpg'
     ],
     github: 'https://github.com/miku1001/Banana-classify-using-SVM',
+    visit: 'https://classify-banana.streamlit.app/',
     accent: 'from-cyan-900/80 to-blue-900/80',
   },
 ]
