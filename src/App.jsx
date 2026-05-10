@@ -97,7 +97,7 @@ const projects = [
   {
     title: 'SupportIQ',
     description: 'An AI-powered chatbot that answers customer inquiries using uploaded company documents.',
-    stack: ['Python','FastAPI','React', 'Tailwind'],
+    stack: ['Python','FastAPI','React', 'Tailwind', 'LangChain'],
     status: 'Website Screenshots',
     images: [
       '/SupportIQ/chat.jpg',
