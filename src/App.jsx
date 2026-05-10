@@ -125,11 +125,15 @@ const projects = [
     accent: 'from-violet-900/80 to-indigo-900/80',
   },
   {
-    title: 'Recruitment Data Tracker',
-    description: 'Internal tracker for applicant pipeline, interview metrics, and hiring conversion reports.',
-    stack: ['SQL','Python','FastAPI', 'Supabase'],
+    title: 'Banana Classify',
+    description: 'An app that will help predict whether the given picture of banana is unripe, ripe, overripe, or rotten.',
+    stack: ['Python','Sckit-learn', 'Streamlit'],
     status: 'Website Screenshot',
-    github: 'https://github.com/miku1001/SupportIQ',
+    images: [
+      '/banana/banana_front.jpg',
+      '/banana/banana_back.jpg'
+    ],
+    github: 'https://github.com/miku1001/Banana-classify-using-SVM',
     accent: 'from-cyan-900/80 to-blue-900/80',
   },
 ]
