@@ -107,7 +107,7 @@ const projects = [
       '/SupportIQ/dashboard.jpg'
     ],
     github: 'https://github.com/miku1001/SupportIQ',
-    visit: 'https://support-iq-3pli.vercel.app/',
+    visit: 'https://supportiq2026.vercel.app/',
     accent: 'from-indigo-900/80 to-blue-900/80',
   },
   {
