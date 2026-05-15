@@ -843,93 +843,74 @@ export default function App() {
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
-            <h2 className="section-title font-title text-4xl font-extrabold text-[var(--text)] mb-3">Get In Touch</h2>
-            <p className="text-[var(--text-2)] text-base max-w-2xl mt-4">
-              Have a question or want to work together? Feel free to drop me a message.
+            <p className="font-mono text-xs tracking-[0.35em] text-[var(--accent-2)] mb-3">CONTACT</p>
+            <div className="h-px w-16 bg-[var(--accent-2)] mb-5"/>
+            <p className="text-[var(--text-2)] text-base max-w-2xl">
+              Open to AI/ML engineering roles, software development and interesting collaborations.
+            </p>
+            <p className="text-[var(--text-2)] text-base max-w-2xl">
+              Based in Manila, Philippines — open to remote.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[0.75fr_1.25fr] gap-10 items-start">
-            {/* Left */}
-            <div className="reveal reveal-left">
-              <p className="font-title font-bold text-base text-[var(--text)] mb-1">Contact Information</p>
-              <p className="text-[var(--text-2)] text-sm leading-relaxed mb-6">
-                Fill up the form and I'll get back to you as soon as possible.
-              </p>
-              <div className="flex flex-col gap-4 mb-8">
-                {[
-                  { Icon: EnvelopeIcon, label: 'Email',    val: 'tedpaulo.feranil@gmail.com', href: 'mailto:tedpaulo.feranil@gmail.com' },
-                  { Icon: PhoneIcon,    label: 'Phone',    val: '+63 915 7996 213',            href: null },
-                  { Icon: MapPinIcon,   label: 'Location', val: 'Manila, Philippines',         href: null },
-                ].map(({ Icon, label, val, href }) => (
-                  <div key={label} className="flex items-start gap-3">
-                    <span className="w-10 h-10 bg-[rgba(99,102,241,0.1)] rounded-xl flex items-center justify-center text-[var(--accent)] flex-shrink-0">
-                      <Icon className="w-5 h-5"/>
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold text-[var(--text)]">{label}</p>
-                      {href
-                        ? <a href={href} className="text-xs text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">{val}</a>
-                        : <p className="text-xs text-[var(--text-2)]">{val}</p>
-                      }
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="font-bold text-sm text-[var(--text)] mb-3">Connect with me</p>
-              <div className="flex gap-3">
-                {[
-                  { href: 'https://github.com/miku1001/',                             Icon: GithubIcon,   label: 'GitHub'   },
-                  { href: 'https://www.linkedin.com/in/ted-paulo-feranil-3643502ba/', Icon: LinkedinIcon, label: 'LinkedIn' },
-                  { href: 'mailto:tedpaulo.feranil@gmail.com',                        Icon: EnvelopeIcon, label: 'Email'    },
-                ].map(({ href, Icon, label }) => (
-                  <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
-                    className="social-btn w-11 h-11 rounded-full border border-[var(--border)] flex items-center justify-center text-[var(--text-2)]">
-                    <Icon className="w-5 h-5"/>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Form */}
-            <div className="reveal reveal-right card p-7">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                {[
-                  { label: 'Your Name',  placeholder: 'John Doe',             type: 'text'  },
-                  { label: 'Your Email', placeholder: 'john@example.com',     type: 'email' },
-                ].map(f => (
-                  <div key={f.label} className="flex flex-col gap-1.5">
-                    <label className="text-sm font-semibold text-[var(--text)]">{f.label}</label>
-                    <input
-                      type={f.type}
-                      placeholder={f.placeholder}
-                      className="form-input rounded-lg px-4 py-2.5 text-sm font-mono"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col gap-1.5 mb-4">
-                <label className="text-sm font-semibold text-[var(--text)]">Subject</label>
-                <input
-                  type="text"
-                  placeholder="How can I help you?"
-                  className="form-input rounded-lg px-4 py-2.5 text-sm font-mono"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5 mb-6">
-                <label className="text-sm font-semibold text-[var(--text)]">Message</label>
-                <textarea
-                  rows={5}
-                  placeholder="Your message here..."
-                  className="form-input rounded-lg px-4 py-2.5 text-sm font-mono resize-y"
-                />
-              </div>
-              <button
-                type="button"
-                className="btn-primary w-full text-white font-bold py-3 rounded-lg text-sm"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+            {[
+              {
+                label: 'Email',
+                value: 'tedpaulo.feranil@gmail.com',
+                note: 'Best way to reach me',
+                href: 'mailto:tedpaulo.feranil@gmail.com',
+                Icon: EnvelopeIcon,
+              },
+              {
+                label: 'LinkedIn',
+                value: 'linkedin.com/in/ted-paulo-feranil-3643502ba',
+                note: 'Connect professionally',
+                href: 'https://www.linkedin.com/in/ted-paulo-feranil-3643502ba/',
+                Icon: LinkedinIcon,
+              },
+              {
+                label: 'GitHub',
+                value: 'github.com/miku1001',
+                note: 'Projects and open source',
+                href: 'https://github.com/miku1001/',
+                Icon: GithubIcon,
+              },
+              {
+                label: 'Resume',
+                value: 'Download PDF',
+                note: 'Latest CV and experience',
+                href: '/Ted Paulo Feranil-Resume.pdf',
+                Icon: ArrowDownTrayIcon,
+                download: true,
+              },
+            ].map(item => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
+                download={item.download ? 'Ted Paulo Feranil-Resume.pdf' : undefined}
+                className="card p-6 hover:-translate-y-1 transition-all"
               >
-                Send Message
-              </button>
+                <div className="w-10 h-10 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center text-[var(--text-2)] mb-4">
+                  <item.Icon className="w-5 h-5"/>
+                </div>
+                <p className="font-title font-bold text-base text-[var(--text)] mb-1">{item.label}</p>
+                <p className="text-xs text-[var(--text-2)] break-all">{item.value}</p>
+                <p className="text-xs text-[var(--text-2)] mt-2">{item.note}</p>
+              </a>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-10 text-sm">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-[var(--text-2)]">PHONE</span>
+              <span className="text-[var(--text)] font-semibold">+63 915 7996 213</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-[var(--text-2)]">LOCATION</span>
+              <span className="text-[var(--text)] font-semibold">Manila, Philippines</span>
             </div>
           </div>
         </div>
