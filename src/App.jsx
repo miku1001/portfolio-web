@@ -32,56 +32,61 @@ const skillsTabs = [
     label: 'Languages',
     items: [
       { logo: 'https://cdn.simpleicons.org/python/3776AB',     name: 'Python'     },
-      { logo: 'https://cdn.simpleicons.org/javascript/F7DF1E', name: 'JavaScript' },
       { logo: 'https://cdn.simpleicons.org/php/777BB4',        name: 'PHP'        },
-      { logo: 'https://cdn.simpleicons.org/mysql/4479A1',      name: 'SQL'        },
-      { logo: 'https://cdn.simpleicons.org/dart/0175C2',       name: 'Dart'       },
+      { logo: 'https://cdn.simpleicons.org/javascript/F7DF1E', name: 'JavaScript' },
+      { logo: 'https://cdn.simpleicons.org/html5/E34F26',      name: 'HTML'       },
+      { logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg', name: 'CSS' },
     ],
   },
   {
     key: 'frameworks',
     label: 'Frameworks & Libraries',
     items: [
-      { logo: 'https://cdn.simpleicons.org/react/61DAFB',       name: 'React'        },
-      { logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4', name: 'Tailwind CSS' },
-      { logo: 'https://cdn.simpleicons.org/bootstrap/7952B3',   name: 'Bootstrap'    },
-      { logo: 'https://cdn.simpleicons.org/html5/E34F26',       name: 'HTML5'        },
-      { logo: 'https://cdn.simpleicons.org/css/1572B6',         name: 'CSS3'         },
-      { logo: 'https://cdn.simpleicons.org/laravel/FF2D20',     name: 'Laravel'      },
-      { logo: 'https://cdn.simpleicons.org/livewire/FB70A9',    name: 'Livewire'     },
-      { logo: 'https://cdn.simpleicons.org/django/092E20',      name: 'Django'       },
       { logo: 'https://cdn.simpleicons.org/flask/000000',       name: 'Flask'        },
       { logo: 'https://cdn.simpleicons.org/fastapi/009688',     name: 'FastAPI'      },
-      { logo: 'https://cdn.simpleicons.org/flutter/02569B',     name: 'Flutter'      },
+      { logo: 'https://cdn.simpleicons.org/laravel/FF2D20',     name: 'Laravel'      },
+      { logo: 'https://cdn.simpleicons.org/bootstrap/7952B3',   name: 'Bootstrap'    },
+      { logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4', name: 'Tailwind'     },
     ],
   },
   {
-    key: 'ml',
-    label: 'ML / Data',
+    key: 'ai-data',
+    label: 'AI & Data',
     items: [
-      { logo: 'https://cdn.simpleicons.org/pandas/150458',      name: 'Pandas'       },
-      { logo: 'https://cdn.simpleicons.org/numpy/013243',       name: 'NumPy'        },
-      { logo: 'https://cdn.simpleicons.org/scikitlearn/F7931E', name: 'Scikit-learn' },
-      { logo: 'https://cdn.simpleicons.org/pytorch/EE4C2C',     name: 'PyTorch'      },
-      { logo: 'https://cdn.simpleicons.org/plotly/3F4F75',      name: 'Plotly'       },
-      { logo: 'https://cdn.simpleicons.org/langchain/1C3C3C',   name: 'LangChain'    },
-      { logo: 'https://cdn.simpleicons.org/langchain/1C3C3C',   name: 'LangGraph'    },
-      { logo: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg', name: 'Matplotlib' },
+      { logo: '',                                               name: 'RAG Pipeline'       },
+      { logo: '',                                               name: 'LLM Integration'    },
+      { logo: '',                                               name: 'Prompt Engineering' },
+      { logo: '',                                               name: 'Vector Embeddings'  },
+      { logo: 'https://cdn.simpleicons.org/huggingface/FFD21E', name: 'Hugging Face'       },
+      { logo: 'https://cdn.simpleicons.org/scikitlearn/F7931E', name: 'Scikit-learn'       },
+      { logo: 'https://cdn.simpleicons.org/langchain/1C3C3C',   name: 'LangChain'          },
+      { logo: 'https://cdn.simpleicons.org/pytorch/EE4C2C',     name: 'PyTorch'            },
     ],
   },
   {
-    key: 'cloud',
-    label: 'Cloud & DevOps',
+    key: 'databases',
+    label: 'Databases',
     items: [
-      { logo: 'https://cdn.simpleicons.org/firebase/FFCA28',   name: 'Firebase'   },
-      { logo: 'https://cdn.simpleicons.org/supabase/3ECF8E',   name: 'Supabase'   },
-      { logo: 'https://cdn.simpleicons.org/postgresql/4169E1', name: 'PostgreSQL'  },
-      { logo: 'https://cdn.simpleicons.org/mysql/4479A1',      name: 'MySQL'       },
-      { logo: 'https://cdn.simpleicons.org/git/F05032',        name: 'Git'         },
-      { logo: 'https://cdn.simpleicons.org/github/181717',     name: 'GitHub'      },
-      { logo: 'https://cdn.simpleicons.org/npm/CB3837',        name: 'npm'         },
-      { logo: 'https://cdn.simpleicons.org/postman/FF6C37',    name: 'Postman'     },
-      { logo: 'https://cdn.simpleicons.org/composer/885630',   name: 'Composer'    },
+      { logo: 'https://cdn.simpleicons.org/mysql/4479A1',      name: 'MySQL'                },
+      { logo: 'https://cdn.simpleicons.org/supabase/3ECF8E',   name: 'Supabase'             },
+      { logo: 'https://cdn.simpleicons.org/firebase/FFCA28',   name: 'Firebase (Firestore)' },
+      { logo: '/chromadb.png',                                  name: 'ChromaDB'            },
+      { logo: '',                                               name: 'FAISS'               },
+      { logo: 'https://cdn.simpleicons.org/postgresql/4169E1', name: 'Supabase pgvector'     },
+    ],
+  },
+  {
+    key: 'tools',
+    label: 'Tools & Practices',
+    items: [
+      { logo: 'https://cdn.simpleicons.org/git/F05032',        name: 'Git'              },
+      { logo: 'https://cdn.simpleicons.org/github/181717',     name: 'GitHub'           },
+      { logo: 'https://cdn.simpleicons.org/postman/FF6C37',    name: 'Postman'          },
+      { logo: '',                                               name: 'REST APIs'        },
+      { logo: '',                                               name: 'Agile'            },
+      { logo: '',                                               name: 'API Testing'      },
+      { logo: '',                                               name: 'Debugging'        },
+      { logo: '',                                               name: 'Test Case Design' },
     ],
   },
 ]
@@ -754,7 +759,7 @@ export default function App() {
           <div className="mx-auto w-full max-w-7xl">
             {/* Tabs */}
             <div className="reveal flex justify-center mb-10">
-              <div className="inline-flex items-center gap-1 p-1 rounded-full border border-[var(--border)] bg-[rgba(99,102,241,0.06)]">
+              <div className="flex flex-wrap items-center justify-center gap-2 p-1 rounded-full border border-[var(--border)] bg-[rgba(99,102,241,0.06)]">
                 {skillsTabs.map(tab => {
                   const isActive = tab.key === skillsTab
                   return (
@@ -763,7 +768,7 @@ export default function App() {
                       type="button"
                       onClick={() => setSkillsTab(tab.key)}
                       className={
-                        'px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ' +
+                        'px-3 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 ' +
                         (isActive
                           ? 'bg-[rgba(99,102,241,0.18)] text-[var(--accent)] shadow-inner'
                           : 'text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[rgba(99,102,241,0.08)]')
