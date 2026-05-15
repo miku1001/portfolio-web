@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const Prerenderer = require('@prerenderer/prerenderer')
-const PuppeteerRenderer = require('@prerenderer/renderer-puppeteer')
+const JSDOMRenderer = require('@prerenderer/renderer-jsdom')
 
 const outputDir = path.join(process.cwd(), 'dist')
 const routes = ['/']
@@ -10,9 +10,7 @@ async function run() {
   const prerenderer = new Prerenderer({
     staticDir: outputDir,
     routes,
-    renderer: new PuppeteerRenderer({
-      headless: true,
-    }),
+    renderer: new JSDOMRenderer(),
   })
 
   try {
