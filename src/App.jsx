@@ -139,6 +139,20 @@ const projects = [
     visit: 'https://classify-banana.streamlit.app/',
     accent: 'from-cyan-900/80 to-blue-900/80',
   },
+  {
+    title: 'Earprompt: Real-time Ai Conversation Assistant',
+    description: 'A device that will help users with communication problem to have real-time conversation assistant',
+    stack: ['Python','Flask', 'Flutter', 'Firebase', 'OpenAI API', 'Speechbrain', 'ElevenLabs API', 'Praat'],
+    status: 'Thesis',
+    images: [
+      '/earprompt/gpic.png',
+      '/earprompt/device.jpg',
+      '/earprompt/earpromp_dashboard.jpg',
+      '/earprompt/earpromp_login.jpg',
+      '/earprompt/earpromp_settings.jpg',
+    ],
+    accent: 'from-cyan-900/80 to-blue-900/80',
+  }
 ]
 
 const achievements = [
@@ -672,7 +686,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
+          <div className="projects-scroll max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, i) => (
                 <article key={project.title}
@@ -812,7 +826,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
+          <div className="achievements-scroll max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {achievements.filter(item => item.image).map((item, i) => (
                 <article key={item.title}
@@ -843,8 +857,7 @@ export default function App() {
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
-            <p className="font-mono text-xs tracking-[0.35em] text-[var(--accent-2)] mb-3">CONTACT</p>
-            <div className="h-px w-16 bg-[var(--accent-2)] mb-5"/>
+            <h2 className="section-title font-title text-4xl font-extrabold text-[var(--text)] mb-3">Contact</h2>
             <p className="text-[var(--text-2)] text-base max-w-2xl">
               Open to AI/ML engineering roles, software development and interesting collaborations.
             </p>

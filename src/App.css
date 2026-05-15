@@ -268,6 +268,41 @@ rame
   --icon-opacity: 0.1;
 }
 
+/* ── Projects scroll fade (mobile only) ───────────────────────────────────── */
+.projects-scroll {
+  position: relative;
+}
+
+.achievements-scroll {
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .projects-scroll::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    display: block;
+    height: 56px;
+    margin-top: -56px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), var(--surface-2));
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .achievements-scroll::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    display: block;
+    height: 56px;
+    margin-top: -56px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0), var(--surface-2));
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
 /* ── Noise overlay ──────────────────────────────────────────────────────────── */
 .noise::before {
   content: '';
