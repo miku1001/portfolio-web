@@ -102,6 +102,20 @@ const skillCategories = [
 
 const projects = [
   {
+    title: 'Earprompt: Real-time Ai Conversation Assistant',
+    description: 'A device that will help users with communication problem to have real-time conversation assistant',
+    stack: ['Python','Flask', 'Flutter', 'Firebase', 'OpenAI API', 'Speechbrain', 'ElevenLabs API', 'Praat'],
+    status: 'Thesis',
+    images: [
+      '/earprompt/gpic.png',
+      '/earprompt/device.jpg',
+      '/earprompt/earpromp_dashboard.jpg',
+      '/earprompt/earpromp_login.jpg',
+      '/earprompt/earpromp_settings.jpg',
+    ],
+    accent: 'from-cyan-900/80 to-blue-900/80',
+  },
+  {
     title: 'SupportIQ',
     description: 'An AI-powered chatbot that answers customer inquiries using uploaded company documents.',
     stack: ['Python','FastAPI','React', 'Tailwind', 'LangChain', 'Supabase'],
@@ -114,6 +128,34 @@ const projects = [
     github: 'https://github.com/miku1001/SupportIQ',
     visit: 'https://supportiq2026.vercel.app/',
     accent: 'from-indigo-900/80 to-blue-900/80',
+  },
+  {
+    title: 'HireGenie',
+    description: 'An app that will help the users refine their resume based on the given job description.',
+    stack: ['Python','LangChain','LangGraph', 'Streamlit'],
+    status: 'Website Screenshot',
+    images: [
+      '/hiregenie/1.jpg',
+      '/hiregenie/2.jpg',
+      '/hiregenie/3.jpg',
+      '/hiregenie/4.jpg'
+    ],
+    github: 'https://github.com/miku1001/HireGenie.git',
+    visit: 'https://hiregenieai.streamlit.app/',
+    accent: 'from-cyan-900/80 to-blue-900/80',
+  },
+  {
+    title: 'Banana Classify',
+    description: 'An app that will help predict whether the given picture of banana is unripe, ripe, overripe, or rotten.',
+    stack: ['Python','Sckit-learn', 'Streamlit'],
+    status: 'Website Screenshot',
+    images: [
+      '/banana/banana_front.jpg',
+      '/banana/banana_back.jpg'
+    ],
+    github: 'https://github.com/miku1001/Banana-classify-using-SVM',
+    visit: 'https://classify-banana.streamlit.app/',
+    accent: 'from-cyan-900/80 to-blue-900/80',
   },
   {
     title: 'StudentHub',
@@ -131,33 +173,8 @@ const projects = [
     github: 'https://github.com/miku1001/Student-Hub',
     accent: 'from-violet-900/80 to-indigo-900/80',
   },
-  {
-    title: 'Banana Classify',
-    description: 'An app that will help predict whether the given picture of banana is unripe, ripe, overripe, or rotten.',
-    stack: ['Python','Sckit-learn', 'Streamlit'],
-    status: 'Website Screenshot',
-    images: [
-      '/banana/banana_front.jpg',
-      '/banana/banana_back.jpg'
-    ],
-    github: 'https://github.com/miku1001/Banana-classify-using-SVM',
-    visit: 'https://classify-banana.streamlit.app/',
-    accent: 'from-cyan-900/80 to-blue-900/80',
-  },
-  {
-    title: 'Earprompt: Real-time Ai Conversation Assistant',
-    description: 'A device that will help users with communication problem to have real-time conversation assistant',
-    stack: ['Python','Flask', 'Flutter', 'Firebase', 'OpenAI API', 'Speechbrain', 'ElevenLabs API', 'Praat'],
-    status: 'Thesis',
-    images: [
-      '/earprompt/gpic.png',
-      '/earprompt/device.jpg',
-      '/earprompt/earpromp_dashboard.jpg',
-      '/earprompt/earpromp_login.jpg',
-      '/earprompt/earpromp_settings.jpg',
-    ],
-    accent: 'from-cyan-900/80 to-blue-900/80',
-  }
+
+  
 ]
 
 const achievements = [
