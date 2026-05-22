@@ -150,9 +150,9 @@ const projects = [
     stack: ['Python','OpenAI API', 'Matplotlib'],
     status: 'Website Screenshot',
     images: [
-      '/llmskill/1.jpg',
-      '/llmskill/2.jpg',
-      '/llmskill/3.jpg'
+      '/llmskill/1.png',
+      '/llmskill/2.png',
+      '/llmskill/3.png'
     ],
     github: 'https://github.com/miku1001/llm-skills-pipeline',
     accent: 'from-cyan-900/80 to-blue-900/80',
