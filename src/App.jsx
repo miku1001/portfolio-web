@@ -145,6 +145,19 @@ const projects = [
     accent: 'from-cyan-900/80 to-blue-900/80',
   },
   {
+    title: 'LLM Skill Analysis',
+    description: "An end-to-end framework that extracts and catalogs LLM skills, generates skill‑labeled tasks and chain‑of‑thought traces, and runs iterative evaluation and training (UIDs, difficulty ranking, MCTS) to improve models' metacognitive and task‑specific performance.",
+    stack: ['Python','OpenAI API', 'Matplotlib'],
+    status: 'Website Screenshot',
+    images: [
+      '/llmskill/1.jpg',
+      '/llmskill/2.jpg',
+      '/llmskill/3.jpg'
+    ],
+    github: 'https://github.com/miku1001/llm-skills-pipeline',
+    accent: 'from-cyan-900/80 to-blue-900/80',
+  },
+  {
     title: 'Banana Classify',
     description: 'An app that will help predict whether the given picture of banana is unripe, ripe, overripe, or rotten.',
     stack: ['Python','Sckit-learn', 'Streamlit'],
