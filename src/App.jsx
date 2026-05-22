@@ -148,7 +148,7 @@ const projects = [
     title: 'LLM Skill Analysis',
     description: "An end-to-end framework that extracts and catalogs LLM skills, generates skill‑labeled tasks and chain‑of‑thought traces, and runs iterative evaluation and training (UIDs, difficulty ranking, MCTS) to improve models' metacognitive and task‑specific performance.",
     stack: ['Python','OpenAI API', 'Matplotlib'],
-    status: 'Website Screenshot',
+    status: 'LLM Research',
     images: [
       '/llmskill/1.png',
       '/llmskill/2.png',
