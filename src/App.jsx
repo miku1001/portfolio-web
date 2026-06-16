@@ -11,6 +11,8 @@ import {
   MapPinIcon,
   ArrowDownTrayIcon,
   ChevronUpIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   UserIcon,
   AcademicCapIcon,
   BriefcaseIcon,
@@ -22,6 +24,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { CircleStackIcon as CircleStackSolid } from '@heroicons/react/24/solid'
 import { Squares2X2Icon as Squares2X2Solid } from '@heroicons/react/24/solid'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 
 // ─── Skills Data ───────────────────────────────────────────────────────────────
@@ -102,7 +105,7 @@ const skillCategories = [
 
 const projects = [
   {
-    title: 'Earprompt: Real-time Ai Conversation Assistant',
+    title: 'Earprompt: Real-time AI Conversation Assistant',
     description: 'A device that will help users with communication problem to have real-time conversation assistant',
     stack: ['Python','Flask', 'Flutter', 'Firebase', 'OpenAI API', 'Speechbrain', 'ElevenLabs API', 'Praat'],
     status: 'Thesis',
@@ -160,14 +163,14 @@ const projects = [
   {
     title: 'Banana Classify',
     description: 'An app that will help predict whether the given picture of banana is unripe, ripe, overripe, or rotten.',
-    stack: ['Python','Sckit-learn', 'Streamlit'],
+    stack: ['Python','Scikit-learn', 'Streamlit'],
     status: 'Website Screenshot',
     images: [
       '/banana/banana_front.jpg',
       '/banana/banana_back.jpg'
     ],
     github: 'https://github.com/miku1001/Banana-classify-using-SVM',
-    visit: 'https://classify-banana.streamlit.app/',
+    visit: 'https://bananaclassify2026.streamlit.app',
     accent: 'from-cyan-900/80 to-blue-900/80',
   },
   {
@@ -343,11 +346,121 @@ function TypingEffect({ texts = ['Software Engineer'], speed = 80, delayBetween 
   return <span>{text}<span className="typing-cursor">|</span></span>
 }
 
+// ─── Project card (per-card image carousel) ─────────────────────────────────────
+
+function ProjectCard({ project, index }) {
+  const images = project.images ?? []
+  const count = images.length
+  const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    if (paused || count <= 1) return
+    const id = setInterval(() => setCurrent(c => (c + 1) % count), 3200)
+    return () => clearInterval(id)
+  }, [paused, count])
+
+  const go = dir => setCurrent(c => (c + dir + count) % count)
+
+  return (
+    <article className={`reveal card overflow-hidden flex flex-col delay-${index + 1}`}>
+      {/* Thumbnail / carousel */}
+      <div
+        className={`group/carousel relative w-full aspect-video bg-gradient-to-br ${project.accent} flex items-center justify-center overflow-hidden`}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[rgba(99,102,241,0.3)] to-transparent pointer-events-none"/>
+        {count ? (
+          <>
+            {images.map((src, idx) => (
+              <img
+                key={src}
+                src={src}
+                alt={`${project.title} preview ${idx + 1}`}
+                loading="lazy"
+                className={`absolute inset-0 w-full h-full object-contain bg-[#0b1020] transition-opacity duration-500 ${idx === current ? 'opacity-100' : 'opacity-0'}`}
+              />
+            ))}
+
+            {count > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous image"
+                  onClick={() => go(-1)}
+                  className="absolute z-[3] left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100 transition-opacity"
+                >
+                  <ChevronLeftIcon className="w-4 h-4"/>
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next image"
+                  onClick={() => go(1)}
+                  className="absolute z-[3] right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center opacity-0 group-hover/carousel:opacity-100 focus-visible:opacity-100 transition-opacity"
+                >
+                  <ChevronRightIcon className="w-4 h-4"/>
+                </button>
+
+                <div className="absolute z-[3] bottom-2 right-3 flex items-center gap-1.5">
+                  {images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      aria-label={`Show image ${idx + 1}`}
+                      aria-current={idx === current}
+                      onClick={() => setCurrent(idx)}
+                      className={`h-1.5 rounded-full transition-all ${idx === current ? 'w-4 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <span className="relative text-6xl opacity-50 select-none">{project.emoji}</span>
+        )}
+        <span className="absolute z-[2] bottom-2 left-3 font-mono text-[11px] text-white/50 bg-black/30 px-2 py-0.5 rounded-full">
+          {project.status}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div className="p-5 flex flex-col gap-3 flex-1">
+        <h3 className="font-title font-bold text-base text-[var(--text)]">{project.title}</h3>
+        <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.stack.map(s => (
+            <span key={s} className="skill-pill bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.15)] text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
+              {s}
+            </span>
+          ))}
+        </div>
+        {(project.github || project.visit) && (
+          <div className="border-t border-[var(--border)] pt-3 flex items-center gap-2">
+            {project.github ? (
+              <a href={project.github} target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(99,102,241,0.1)] hover:border-[rgba(99,102,241,0.4)] hover:text-[var(--accent)] transition-all">
+                <GithubIcon className="w-4 h-4"/> GitHub
+              </a>
+            ) : null}
+            {project.visit ? (
+              <a href={project.visit} target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(6,182,212,0.1)] hover:border-[rgba(6,182,212,0.4)] hover:text-[var(--accent-2)] transition-all">
+                Visit
+              </a>
+            ) : null}
+          </div>
+        )}
+      </div>
+    </article>
+  )
+}
+
 // ─── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
   const [showTop, setShowTop] = useState(false)
-  const [projectImageTick, setProjectImageTick] = useState(0)
   const [skillsTab, setSkillsTab] = useState(skillsTabs[0].key)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDark, setIsDark] = useState(() => {
@@ -369,15 +482,35 @@ export default function App() {
   }, [isDark])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProjectImageTick(prev => prev + 1)
-    }, 3200)
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
+  }, [isMenuOpen])
+
+  // Mobile menu: close on Escape + trap focus inside the panel while open
+  const mobilePanelRef = useRef(null)
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const panel = mobilePanelRef.current
+    const focusable = panel?.querySelectorAll('a[href], button:not([disabled])')
+    const first = focusable?.[0]
+    const last = focusable?.[focusable.length - 1]
+    first?.focus()
+
+    const onKeyDown = e => {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false)
+      } else if (e.key === 'Tab' && focusable?.length) {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
   }, [isMenuOpen])
 
   // Achievements will be displayed in a scrollable container on small screens
@@ -431,7 +564,7 @@ export default function App() {
           className="mobile-nav-backdrop"
           onClick={() => setIsMenuOpen(false)}
         />
-        <aside className="mobile-nav-panel" role="dialog" aria-modal="true">
+        <aside ref={mobilePanelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Site navigation">
           <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)]">
             <span className="font-title font-black text-lg gradient-text">TeDev</span>
             <button
@@ -596,7 +729,7 @@ export default function App() {
                 </div>
                 <p className="font-bold text-[var(--text)] mb-1">BS in Computer Engineering, Major in AI/ML</p>
                 <p className="text-[var(--text-2)] text-sm mb-3">Polytechnic University of the Philippines - Manila</p>
-                <p className="text-[var(--text-2)] text-xs font-mono mb-4">2022 – Present</p>
+                <p className="text-[var(--text-2)] text-xs font-mono mb-4">2022 – 2026</p>
                 <div className="flex flex-wrap gap-2">
                   {['Software Engineering','Data Science','AI/ML'].map(tag => (
                     <span key={tag} className="skill-pill text-xs bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] text-[var(--accent)] px-3 py-1 rounded-full">
@@ -724,51 +857,7 @@ export default function App() {
           <div className="projects-scroll max-h-[60vh] sm:max-h-none overflow-y-auto pr-2">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, i) => (
-                <article key={project.title}
-                  className={`reveal card overflow-hidden flex flex-col delay-${i + 1}`}>
-                  {/* Thumbnail */}
-                  <div className={`relative w-full aspect-video bg-gradient-to-br ${project.accent} flex items-center justify-center overflow-hidden`}>
-                    <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[rgba(99,102,241,0.3)] to-transparent pointer-events-none"/>
-                    {project.images?.length ? (
-                      <div className="absolute inset-0">
-                        <img
-                          src={project.images[projectImageTick % project.images.length]}
-                          alt={`${project.title} preview`}
-                          className="absolute inset-0 w-full h-full object-contain bg-[#0b1020]"
-                        />
-                      </div>
-                    ) : (
-                      <span className="relative text-6xl opacity-50 select-none">{project.emoji}</span>
-                    )}
-                    <span className="absolute z-[2] bottom-2 left-3 font-mono text-[11px] text-white/50 bg-black/30 px-2 py-0.5 rounded-full">
-                      {project.status}
-                    </span>
-                  </div>
-                  {/* Body */}
-                  <div className="p-5 flex flex-col gap-3 flex-1">
-                    <h3 className="font-title font-bold text-base text-[var(--text)]">{project.title}</h3>
-                    <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.stack.map(s => (
-                        <span key={s} className="skill-pill bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.15)] text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="border-t border-[var(--border)] pt-3 flex items-center gap-2">
-                      <a href={project.github} target="_blank" rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(99,102,241,0.1)] hover:border-[rgba(99,102,241,0.4)] hover:text-[var(--accent)] transition-all">
-                        <GithubIcon className="w-4 h-4"/> GitHub
-                      </a>
-                      {project.visit ? (
-                        <a href={project.visit} target="_blank" rel="noreferrer"
-                          className="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--text-2)] hover:bg-[rgba(6,182,212,0.1)] hover:border-[rgba(6,182,212,0.4)] hover:text-[var(--accent-2)] transition-all">
-                          Visit
-                        </a>
-                      ) : null}
-                    </div>
-                  </div>
-                </article>
+                <ProjectCard key={project.title} project={project} index={i} />
               ))}
             </div>
           </div>
@@ -982,6 +1071,8 @@ export default function App() {
       >
         <ChevronUpIcon className="w-5 h-5"/>
       </button>
+
+      <Analytics />
     </div>
   )
 }
