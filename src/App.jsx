@@ -15,7 +15,6 @@ import {
   ChevronRightIcon,
   UserIcon,
   AcademicCapIcon,
-  BriefcaseIcon,
   SunIcon,
   MoonIcon,
   SparklesIcon,
@@ -601,7 +600,7 @@ export default function App() {
       </div>
 
       {/* ── HERO ── */}
-      <section id="home" className="hero-section relative min-h-screen flex flex-col justify-center pt-24 md:pt-28 overflow-hidden bg-[var(--surface-2)] hero-grid noise">
+      <section id="home" className="hero-section relative min-h-screen flex flex-col justify-center pt-24 sm:pt-20 overflow-hidden bg-[var(--surface-2)] hero-grid noise">
         <div className="hero-blob hero-blob-1"/>
         <div className="hero-blob hero-blob-2"/>
 
@@ -693,7 +692,7 @@ export default function App() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section id="about" className="relative min-h-screen flex flex-col justify-center pt-24 pb-18 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
+      <section id="about" className="relative min-h-screen flex flex-col justify-center pt-24 pb-20 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
         <div className="hero-blob hero-blob-3"/>
         <div className="hero-blob hero-blob-4"/>
 
@@ -717,7 +716,7 @@ export default function App() {
               </div>
 
               {/* Education card */}
-              <div className="about-card-education card card-glow reveal p-6">
+              <div className="about-card-education exp-card reveal p-6">
                 <div className="flex items-start justify-between mb-5">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-[rgba(99,102,241,0.12)] flex items-center justify-center">
@@ -725,7 +724,6 @@ export default function App() {
                     </div>
                     <h3 className="font-title font-bold text-[var(--text)]">Education</h3>
                   </div>
-                  <span className="font-mono text-xs text-[var(--accent-2)] bg-[rgba(6,182,212,0.1)] border border-[rgba(6,182,212,0.25)] px-3 py-1 rounded-full">Current</span>
                 </div>
                 <p className="font-bold text-[var(--text)] mb-1">BS in Computer Engineering, Major in AI/ML</p>
                 <p className="text-[var(--text-2)] text-sm mb-3">Polytechnic University of the Philippines - Manila</p>
@@ -740,34 +738,48 @@ export default function App() {
               </div>
 
               {/* Experience Timeline */}
-              <div className="about-card-experience card card-glow reveal p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-[rgba(6,182,212,0.1)] flex items-center justify-center">
-                    <BriefcaseIcon className="w-5 h-5 text-[var(--accent-2)]"/>
-                  </div>
-                  <h3 className="font-title font-bold text-[var(--text)]">Experience</h3>
+              <div className="about-card-experience reveal">
+                <div className="text-center mb-8">
+                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-[var(--text-2)] mb-2">Journey</p>
+                  <h3 className="font-title text-lg sm:text-3xl font-medium text-[var(--text)]">
+                    Professional <span className="font-light text-[var(--text-2)]">Timeline</span>
+                  </h3>
                 </div>
-                <div className="space-y-5 relative">
-                  <div className="absolute left-[14px] top-4 bottom-0 w-px bg-gradient-to-b from-[var(--accent)] via-[var(--accent-2)] to-transparent"/>
-                  {experienceData.map((exp, idx) => (
-                    <div key={idx} className={`exp-timeline-item relative pl-10 delay-${idx + 1}`}>
-                      <div
-                        className="timeline-dot absolute left-1 top-1.5 w-6 h-6 rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-2)] border-2 border-[var(--surface)] shadow-lg"
-                        style={{ animationDelay: `${idx * 0.8}s` }}
-                      />
-                      <p className="font-bold text-base text-[var(--text)]">{exp.role}</p>
-                      <p className="text-[var(--text-2)] text-sm mb-1">{exp.company}</p>
-                      <p className="gradient-text font-mono text-xs font-semibold mb-2">{exp.period}</p>
-                      <ul className="space-y-1">
-                        {exp.highlights.map((h, i) => (
-                          <li key={i} className="text-sm text-[var(--text-2)] flex items-start gap-2">
-                            <span className="w-1 h-1 rounded-full bg-[var(--accent)] mt-1.5 flex-shrink-0"/>
-                            <span>{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <div className="relative">
+                  {/* vertical rail */}
+                  <span aria-hidden="true" className="absolute left-[13px] top-4 bottom-4 w-[2px] rounded-full bg-gradient-to-b from-[var(--accent)] via-[var(--accent-2)] to-transparent"/>
+                  <div className="space-y-5">
+                    {experienceData.map((exp, idx) => (
+                      <div key={idx} className="exp-item group relative pl-10">
+                        {/* connector line: draws from node → card on hover */}
+                        <span
+                          aria-hidden="true"
+                          className="absolute left-[20px] top-[26px] w-[20px] h-[2px] rounded-full bg-[var(--accent)] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                        />
+                        {/* timeline node (hollow, fills on hover) */}
+                        <span
+                          aria-hidden="true"
+                          className="absolute left-[7px] top-5 w-3.5 h-3.5 rounded-full border-2 bg-[var(--surface-2)] border-[var(--text-2)] group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:scale-125 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                        />
+                        {/* entry card */}
+                        <div className="exp-card px-5 py-4">
+                          <span className="inline-block font-mono text-[11px] font-semibold tracking-wider uppercase text-[var(--text-2)] bg-[rgba(148,163,184,0.08)] border border-[var(--border)] px-3 py-1 rounded-full mb-3">
+                            {exp.period}
+                          </span>
+                          <p className="font-bold text-base text-[var(--text)] leading-snug">{exp.role}</p>
+                          <p className="text-[var(--text-2)] text-sm mb-3">{exp.company}</p>
+                          <ul className="space-y-1.5">
+                            {exp.highlights.map((h, i) => (
+                              <li key={i} className="text-sm text-[var(--text-2)] flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-[7px] flex-shrink-0"/>
+                                <span>{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

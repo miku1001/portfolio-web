@@ -68,16 +68,6 @@ rame
   to   { opacity: 1; }
 }
 
-@keyframes slideLeft {
-  from { opacity: 0; transform: translateX(-28px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideRight {
-  from { opacity: 0; transform: translateX(28px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
 @keyframes pulseBorder {
   0%, 100% { box-shadow: 0 0 0 0 var(--glow-indigo); }
   50%       { box-shadow: 0 0 0 6px transparent; }
@@ -91,11 +81,6 @@ rame
 @keyframes shimmer {
   0%   { background-position: -200% center; }
   100% { background-position:  200% center; }
-}
-
-@keyframes dotPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.6; transform: scale(0.85); }
 }
 
 @keyframes gradientShift {
@@ -542,16 +527,29 @@ rame
   transition: opacity 0.8s ease 0.2s, max-width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ── Timeline dot pulse ─────────────────────────────────────────────────────── */
-.timeline-dot {
-  animation: dotPulse 2.4s ease-in-out infinite;
-}
-
 /* ── Timeline item hover ────────────────────────────────────────────────────── */
 .exp-timeline-item {
   transition: transform 0.25s ease;
 }
 .exp-timeline-item:hover { transform: translateX(6px); }
+
+/* ── Timeline entry card ────────────────────────────────────────────────────── */
+.exp-card {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.exp-card:hover {
+  border-color: rgba(99,102,241,0.35);
+  box-shadow: 0 10px 30px rgba(99,102,241,0.12);
+  transform: translateY(-3px);
+}
+.dark .exp-card:hover {
+  box-shadow: 0 10px 30px rgba(99,102,241,0.22);
+}
 
 /* ── Skill pill hover ───────────────────────────────────────────────────────── */
 .skill-pill {
@@ -701,12 +699,6 @@ rame
 :root:not(.dark) .c-str     { color: #b45309; }
 :root:not(.dark) .c-key     { color: #b45309; }
 :root:not(.dark) .c-bracket { color: #ca8a04; }
-
-/* ── About slide animations ─────────────────────────────────────────────────── */
-.about-card-education  { animation: slideLeft  0.6s ease forwards; }
-.about-card-experience { animation: slideRight 0.6s ease forwards; }
-.about-card-education:hover,
-.about-card-experience:hover { animation: none; }
 
 /* ── Light mode overrides ───────────────────────────────────────────────────── */
 :root:not(.dark) [class*="bg-[#0a0f1eeb]"] { background-color: rgba(248,250,252,0.88) !important; }
