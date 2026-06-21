@@ -1,0 +1,233 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Intro boot-up loader + Assistant orb / chat FAB
+   All colors pull from the existing theme tokens in App.css (:root / .dark).
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── The orb (shared by loader + FAB) ──────────────────────────────────────── */
+.assistant-orb {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+}
+.assistant-orb__glow,
+.assistant-orb__ring,
+.assistant-orb__core {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+/* bright cyan core fading to brand indigo — matches the "TeDev" logo gradient.
+   Both stops are theme tokens so it stays on-brand and adapts to light mode;
+   depth at the edge comes from the inset shadow rather than a hardcoded navy. */
+.assistant-orb__core {
+  z-index: 1;
+  background: radial-gradient(circle at 50% 36%,
+    var(--accent-2) 0%,
+    var(--accent) 100%);
+  box-shadow:
+    inset 0 1px 6px rgba(255, 255, 255, 0.35),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.28);
+}
+
+/* soft outer glow */
+.assistant-orb__glow {
+  z-index: 0;
+  background: radial-gradient(circle,
+    var(--glow-cyan) 0%,
+    var(--glow-indigo) 45%,
+    transparent 72%);
+  filter: blur(12px);
+  transform: scale(1.45);
+  opacity: 0.85;
+}
+
+/* thin orbiting ring → signals "connecting" */
+.assistant-orb__ring {
+  z-index: 2;
+  border: 2px solid transparent;
+  border-top-color: var(--accent-2);
+  border-bottom-color: var(--border); /* token: visible in both light + dark */
+  transform: scale(1.12);
+  animation: orbSpin 1.8s linear infinite;
+}
+
+/* gentle "breathing" pulse — used only on the idle FAB */
+.assistant-orb--pulse .assistant-orb__glow {
+  animation: orbBreathe 3.2s ease-in-out infinite;
+}
+
+@keyframes orbSpin {
+  from { transform: scale(1.12) rotate(0deg); }
+  to   { transform: scale(1.12) rotate(360deg); }
+}
+@keyframes orbBreathe {
+  0%, 100% { opacity: 0.7; transform: scale(1.35); }
+  50%      { opacity: 1;   transform: scale(1.7); }
+}
+
+/* ── Full-screen overlay ───────────────────────────────────────────────────── */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;                 /* above navbar / back-to-top (both z-50) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);  /* site background — dark or light */
+  opacity: 1;
+  transition: opacity var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1);
+}
+.intro-overlay--dock {            /* reveal: overlay fades to transparent */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Greeting + status (sit just below the centered orb) ───────────────────── */
+.intro-greet {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 84px);
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* stack greeting over status, both centered */
+  text-align: center;
+  transition: opacity 450ms ease, transform 450ms ease;
+}
+.intro-overlay--dock .intro-greet {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}
+
+.intro-greeting {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+}
+.intro-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: var(--accent-2);
+  animation: introCaret 1s steps(1) infinite;
+}
+@keyframes introCaret {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.intro-status {
+  margin: 10px 0 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: color 0.3s ease;
+}
+.intro-status--connected { color: var(--accent-2); }
+.intro-status__spinner {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  border: 2px solid var(--text-2);
+  border-top-color: transparent;
+  animation: orbSpin 0.7s linear infinite;
+}
+.intro-status__check { width: 15px; height: 15px; }
+
+/* ── Subtle, keyboard-focusable Skip ───────────────────────────────────────── */
+.intro-skip {
+  position: fixed;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 8%, transparent);
+  outline: none;
+}
+
+/* ── Shared orb wrapper: loader centre → docked chat FAB ───────────────────── */
+.assistant-fab {
+  position: fixed;
+  z-index: 110;                  /* above the overlay so the orb stays visible */
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* geometry (top/left/width/height/transform) is set inline per phase and
+     animated here for a continuous loader → FAB morph */
+  transition:
+    top var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    left var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    width var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    height var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    transform var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.25s ease;
+}
+.assistant-fab--idle:hover { filter: brightness(1.06); }
+
+/* up-arrow on the docked orb (scroll-to-top affordance) */
+.assistant-fab__icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 44%;
+  height: 44%;
+  z-index: 3;            /* above orb core (1) + ring (2) */
+  color: #fff;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  animation: introIconIn 0.35s ease both;
+}
+@keyframes introIconIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.assistant-fab:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 5px;
+  border-radius: 9999px;
+}
+
+/* ── Reduced motion: no travel, no spin, no pulse ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .assistant-fab { transition: none; }
+  .assistant-orb__ring { animation: none; }
+  .assistant-orb--pulse .assistant-orb__glow { animation: none; }
+  .assistant-fab__icon { animation: none; }
+  .intro-status__spinner { animation: none; }
+  .intro-cursor { animation: none; opacity: 1; }
+  .intro-overlay { transition: opacity 150ms linear; }
+  .intro-greet { transition: opacity 150ms linear; }
+}

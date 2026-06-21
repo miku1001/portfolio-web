@@ -10,7 +10,6 @@ import {
   PhoneIcon,
   MapPinIcon,
   ArrowDownTrayIcon,
-  ChevronUpIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   UserIcon,
@@ -459,7 +458,6 @@ function ProjectCard({ project, index }) {
 // ─── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [showTop, setShowTop] = useState(false)
   const [skillsTab, setSkillsTab] = useState(skillsTabs[0].key)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDark, setIsDark] = useState(() => {
@@ -468,12 +466,6 @@ export default function App() {
   })
 
   useReveal()
-
-  useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 400)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
@@ -1074,15 +1066,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ── SCROLL TO TOP ── */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        aria-label="Scroll to top"
-        className={`back-top fixed bottom-7 right-7 z-50 w-11 h-11 rounded-full text-white flex items-center justify-center
-          ${showTop ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-      >
-        <ChevronUpIcon className="w-5 h-5"/>
-      </button>
+      {/* Scroll-to-top is now handled by the docked assistant orb (see IntroLoader). */}
 
       <Analytics />
     </div>

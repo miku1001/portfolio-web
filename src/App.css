@@ -672,17 +672,6 @@ rame
   transform: translateY(-2px);
 }
 
-/* ── Scroll-to-top button ───────────────────────────────────────────────────── */
-.back-top {
-  background: linear-gradient(135deg, var(--accent), #4f46e5);
-  box-shadow: 0 4px 20px var(--glow-indigo);
-  transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-.back-top:hover {
-  box-shadow: 0 6px 28px var(--glow-indigo);
-  transform: translateY(-3px);
-}
-
 /* ── Syntax highlight ───────────────────────────────────────────────────────── */
 .c-comment { color: #6a9955; }
 .c-kw      { color: #c586c0; }
