@@ -70,6 +70,7 @@ const skillsTabs = [
     label: 'Databases',
     items: [
       { logo: 'https://cdn.simpleicons.org/mysql/4479A1',      name: 'MySQL'                },
+      { logo: 'https://cdn.simpleicons.org/postgresql/4169E1', name: 'PostgreSQL'           },
       { logo: 'https://cdn.simpleicons.org/supabase/3ECF8E',   name: 'Supabase'             },
       { logo: 'https://cdn.simpleicons.org/firebase/FFCA28',   name: 'Firebase (Firestore)' },
       { logo: '/chromadb.png',                                  name: 'ChromaDB'            },
@@ -81,6 +82,8 @@ const skillsTabs = [
     key: 'tools',
     label: 'Tools & Practices',
     items: [
+      { logo: 'https://cdn.simpleicons.org/nodedotjs/339933', name: 'Node.js'        },
+      { logo: 'https://cdn.simpleicons.org/express/000000',   name: 'Express'        },
       { logo: 'https://cdn.simpleicons.org/git/F05032',        name: 'Git'              },
       { logo: 'https://cdn.simpleicons.org/github/181717',     name: 'GitHub'           },
       { logo: 'https://cdn.simpleicons.org/postman/FF6C37',    name: 'Postman'          },
@@ -98,7 +101,7 @@ const skillCategories = [
   { icon: <CpuChipIcon    className="w-[18px] h-[18px]"/>, title: 'Data & ML',             skills: ['Pandas','NumPy','Scikit-learn','PyTorch','LangChain'] },
   { icon: <CircleStackIcon className="w-[18px] h-[18px]"/>, title: 'Databases',             skills: ['PostgreSQL','MySQL','SQLite'] },
   { icon: <ChartBarIcon   className="w-[18px] h-[18px]"/>, title: 'Visualization',         skills: ['Matplotlib','Seaborn','Plotly','Tableau'] },
-  { icon: <CubeIcon       className="w-[18px] h-[18px]"/>, title: 'Frameworks & Tools',    skills: ['Laravel','FastAPI','Git','Jupyter'] },
+  { icon: <CubeIcon       className="w-[18px] h-[18px]"/>, title: 'Frameworks & Tools',    skills: ['Laravel','FastAPI','Node.js','Express','Git','Jupyter'] },
   { icon: <Squares2X2Icon className="w-[18px] h-[18px]"/>, title: 'Frontend',              skills: ['HTML','CSS','React','Tailwind CSS'] },
 ]
 
