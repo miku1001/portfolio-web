@@ -45,6 +45,7 @@ const skillsTabs = [
     items: [
       { logo: 'https://cdn.simpleicons.org/flask/000000',       name: 'Flask'        },
       { logo: 'https://cdn.simpleicons.org/fastapi/009688',     name: 'FastAPI'      },
+      { logo: 'https://cdn.simpleicons.org/react/61DAFB',       name: 'React'        },
       { logo: 'https://cdn.simpleicons.org/laravel/FF2D20',     name: 'Laravel'      },
       { logo: 'https://cdn.simpleicons.org/bootstrap/7952B3',   name: 'Bootstrap'    },
       { logo: 'https://cdn.simpleicons.org/tailwindcss/06B6D4', name: 'Tailwind'     },
