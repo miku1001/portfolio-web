@@ -43,6 +43,8 @@ const skillsTabs = [
     key: 'frameworks',
     label: 'Frameworks & Libraries',
     items: [
+      { logo: 'https://cdn.simpleicons.org/nodedotjs/339933', name: 'Node.js'      },
+      { logo: 'https://cdn.simpleicons.org/express/000000',   name: 'Express'      },
       { logo: 'https://cdn.simpleicons.org/flask/000000',       name: 'Flask'        },
       { logo: 'https://cdn.simpleicons.org/fastapi/009688',     name: 'FastAPI'      },
       { logo: 'https://cdn.simpleicons.org/react/61DAFB',       name: 'React'        },
@@ -82,8 +84,6 @@ const skillsTabs = [
     key: 'tools',
     label: 'Tools & Practices',
     items: [
-      { logo: 'https://cdn.simpleicons.org/nodedotjs/339933', name: 'Node.js'        },
-      { logo: 'https://cdn.simpleicons.org/express/000000',   name: 'Express'        },
       { logo: 'https://cdn.simpleicons.org/git/F05032',        name: 'Git'              },
       { logo: 'https://cdn.simpleicons.org/github/181717',     name: 'GitHub'           },
       { logo: 'https://cdn.simpleicons.org/postman/FF6C37',    name: 'Postman'          },
