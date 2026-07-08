@@ -464,11 +464,23 @@ function ProjectCard({ project, index }) {
 
 export default function App() {
   const [skillsTab, setSkillsTab] = useState(skillsTabs[0].key)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDark, setIsDark] = useState(() => {
     const s = localStorage.getItem('theme')
     return s ? s === 'dark' : true
   })
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [hideNav, setHideNav] = useState(false)
+
+  useEffect(() => {
+    let last = 0
+    const onScroll = () => {
+      const y = window.scrollY
+      setHideNav(y > 80 && y > last)
+      last = y
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useReveal()
 
@@ -482,7 +494,6 @@ export default function App() {
     return () => { document.body.style.overflow = '' }
   }, [isMenuOpen])
 
-  // Mobile menu: close on Escape + trap focus inside the panel while open
   const mobilePanelRef = useRef(null)
   useEffect(() => {
     if (!isMenuOpen) return
@@ -515,14 +526,14 @@ export default function App() {
     <div className="font-body">
 
       {/* ── NAVBAR ── */}
-      <header className="navbar fixed top-0 left-0 right-0 z-50">
-        <div className="max-w-7xl mx-auto w-full px-6 h-[68px] flex items-center justify-between">
+      <header className={`navbar fixed top-0 left-1/2 z-50 -translate-x-1/2 w-[calc(100%-32px)] max-w-7xl transition-transform duration-300 ${hideNav ? '-translate-y-full' : ''}`}>
+        <div className="w-full px-6 h-[68px] flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setIsMenuOpen(true)}
               aria-label="Open menu"
-              className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[var(--accent)] hover:bg-[rgba(99,102,241,0.1)] transition-all"
+              className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[#a1a1aa] hover:bg-[rgba(161,161,170,0.1)] transition-all"
             >
               <Bars3Icon className="w-5 h-5"/>
             </button>
@@ -537,7 +548,7 @@ export default function App() {
             <button
               onClick={() => setIsDark(p => !p)}
               aria-label="Toggle theme"
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[var(--accent)] hover:bg-[rgba(99,102,241,0.1)] transition-all"
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[#a1a1aa] hover:bg-[rgba(161,161,170,0.1)] transition-all"
             >
               {isDark ? <SunIcon className="w-5 h-5"/> : <MoonIcon className="w-5 h-5"/>}
             </button>
@@ -552,7 +563,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* ── MOBILE SIDEBAR ── */}
+      {/* ── MOBILE OVERLAY ── */}
       <div className={`mobile-nav ${isMenuOpen ? 'open' : ''}`} aria-hidden={!isMenuOpen}>
         <button
           type="button"
@@ -561,17 +572,17 @@ export default function App() {
           onClick={() => setIsMenuOpen(false)}
         />
         <aside ref={mobilePanelRef} className="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Site navigation">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)]">
-            <span className="font-title font-black text-lg gradient-text">TeDev</span>
-            <button
-              type="button"
-              aria-label="Close menu"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[var(--accent)] hover:bg-[rgba(99,102,241,0.1)] transition-all"
-            >
-              <XMarkIcon className="w-5 h-5"/>
-            </button>
-          </div>
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all"
+          >
+            <XMarkIcon className="w-5 h-5"/>
+          </button>
+
+          <a href="#home" className="font-title font-black text-2xl gradient-text mb-10" onClick={() => setIsMenuOpen(false)}>TeDev</a>
+
           <nav className="mobile-nav-links">
             {['Home','About','Projects','Skills','Achievements','Contact'].map(link => (
               <a
@@ -584,17 +595,18 @@ export default function App() {
               </a>
             ))}
           </nav>
-          <div className="px-5 pb-5">
-            <a
-              href="/Ted Paulo Feranil-Resume.pdf"
-              download="Ted Paulo Feranil-Resume.pdf"
-              className="btn-primary text-white text-sm font-bold px-5 py-2 rounded-lg w-full inline-flex justify-center"
-            >
-              Resume
-            </a>
-          </div>
+
+          <a
+            href="/Ted Paulo Feranil-Resume.pdf"
+            download="Ted Paulo Feranil-Resume.pdf"
+            className="mt-10 text-sm text-white/40 hover:text-white transition-colors underline underline-offset-4"
+          >
+            Download Resume
+          </a>
         </aside>
       </div>
+
+
 
       {/* ── HERO ── */}
       <section id="home" className="hero-section relative min-h-screen flex flex-col justify-center pt-24 sm:pt-20 overflow-hidden bg-[var(--surface-2)] hero-grid noise">
