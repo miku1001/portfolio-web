@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg:      '#0a0f1e',
-        card:    '#0f1630',
+        bg:      '#000000',
+        card:    '#0a0a0a',
         border:  'rgba(255,255,255,0.08)',
         muted:   '#8892a4',
       },

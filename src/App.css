@@ -11,7 +11,7 @@
   --border:       rgba(15,23,42,0.1);
   --text:         #0f172a;
   --text-2:       #64748b;
-  --glow-indigo:  rgba(99,102,241,0.35);
+  --glow-indigo:  rgba(161,161,170,0.35);
   --glow-cyan:    rgba(6,182,212,0.25);
 }
 
@@ -19,13 +19,13 @@
   --accent:       #818cf8;
   --accent-2:     #22d3ee;
   --accent-3:     #fbbf24;
-  --surface:      #0d1117;
-  --surface-2:    #111827;
-  --border:       rgba(255,255,255,0.07);
-  --text:         #e2e8f0;
-  --text-2:       #94a3b8;
-  --glow-indigo:  rgba(129,140,248,0.4);
-  --glow-cyan:    rgba(34,211,238,0.3);
+  --surface:      #0a0a0a;
+  --surface-2:    #000000;
+  --border:       rgba(255,255,255,0.08);
+  --text:         #e8efff;
+  --text-2:       #8892a4;
+  --glow-indigo:  rgba(129,140,248,0.5);
+  --glow-cyan:    rgba(34,211,238,0.35);
 }
 
 /* ── Base ───────────────────────────────────────────────────────────────────── */
@@ -42,7 +42,72 @@ body {
   color: var(--text);
   transition: background 0.3s, color 0.3s;
 }
-rame
+
+/* ── Cursor follower ───────────────────────────────────────────────────────── */
+.cursor-follower {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  left: -200px;
+  top: -200px;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-follower-core {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a1a1aa;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.35;
+}
+
+.cursor-follower-ring {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #a1a1aa;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0.2;
+  animation: cursorRingPulse 3.5s ease-in-out infinite;
+}
+
+.cursor-follower-suck {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(161,161,170,0.25) 0%, transparent 60%);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.cursor-follower-suck.active {
+  opacity: 0.25;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes cursorRingPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.15; }
+  50%      { transform: translate(-50%, -50%) scale(1.2);  opacity: 0.3; }
+}
+
+/* Show default cursor on interactive elements */
+a, button, input, textarea, select, [role="button"] { cursor: auto; }
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor-follower { display: none; }
+}
 /* ── Typography ─────────────────────────────────────────────────────────────── */
 .font-title { font-family: 'Plus Jakarta Sans', sans-serif; }
 .font-mono  { font-family: 'JetBrains Mono', monospace; }
@@ -92,18 +157,6 @@ rame
 @keyframes scanline {
   0%   { transform: translateY(-100%); }
   100% { transform: translateY(100vh); }
-}
-
-@keyframes blobFloat {
-  0%, 100% { transform: translate(0,0) scale(1); }
-  33%       { transform: translate(30px,-20px) scale(1.05); }
-  66%       { transform: translate(-20px,15px) scale(0.95); }
-}
-
-@keyframes blobFloat2 {
-  0%, 100% { transform: translate(0,0) scale(1); }
-  33%       { transform: translate(-25px,20px) scale(1.04); }
-  66%       { transform: translate(20px,-15px) scale(0.96); }
 }
 
 @keyframes projectCarousel {
@@ -172,62 +225,7 @@ rame
 .delay-4 { transition-delay: 0.4s; }
 .delay-5 { transition-delay: 0.5s; }
 
-/* ── Hero background blobs ──────────────────────────────────────────────────── */
-.hero-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  display: none;
-}
 
-.dark .hero-blob {
-  display: block;
-}
-
-/* Blob 1 — top-left indigo (used in hero, projects, achievements) */
-.hero-blob-1 {
-  width: 480px; height: 480px;
-  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
-  top: -100px; left: -30px;
-  animation: blobFloat 14s ease-in-out infinite;
-}
-
-/* Blob 2 — bottom-right cyan (used in hero, skills, contact) */
-.hero-blob-2 {
-  width: 360px; height: 360px;
-  background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%);
-  bottom: 70px; right: -50px;
-  animation: blobFloat 10s ease-in-out infinite;
-  animation-delay: -4s;
-}
-
-/* Blob 3 — top-right cyan (used in about, skills, achievements) */
-/* .hero-blob-3 {
-  width: 420px; height: 420px;
-  background: radial-gradient(circle, rgba(6,182,212,0.14) 0%, transparent 70%);
-  right: -100px;
-  animation: blobFloat2 12s ease-in-out infinite;
-  animation-delay: -2s;
-} */
-
-/* Blob 4 — bottom-left indigo (used in about, projects, contact) */
-.hero-blob-4 {
-  width: 340px; height: 340px;
-  background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 70%);
-  bottom: -60px; left: -60px;
-  animation: blobFloat2 13s ease-in-out infinite;
-  animation-delay: -6s;
-}
-
-/* Blob footer — subtle center glow for footer */
-.hero-blob-footer {
-  width: 300px; height: 200px;
-  background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation: blobFloat 16s ease-in-out infinite;
-}
 
 /* ── Floating tech icons background ─────────────────────────────────────────── */
 .floating-icons-bg {
@@ -322,7 +320,7 @@ rame
   border-bottom: 1px solid var(--border);
 }
 .dark .navbar {
-  background: rgba(10,13,28,0.82);
+  background: rgba(0,0,0,0.85);
 }
 
 /* ── Mobile sidebar nav ─────────────────────────────────────────────────────── */
@@ -377,8 +375,8 @@ rame
   transition: background 0.2s, color 0.2s;
 }
 .mobile-nav-link:hover {
-  background: rgba(99,102,241,0.12);
-  color: var(--accent);
+  background: rgba(161,161,170,0.12);
+  color: #a1a1aa;
 }
 
 @media (min-width: 768px) {
@@ -402,7 +400,7 @@ rame
   border-radius: 99px;
   transition: width 0.25s ease;
 }
-.nav-link:hover { color: var(--accent); }
+.nav-link:hover { color: #a1a1aa; }
 .nav-link:hover::after { width: 100%; }
 
 /* ── Code card ──────────────────────────────────────────────────────────────── */
@@ -454,12 +452,12 @@ rame
 
 /* ── Glowing button ─────────────────────────────────────────────────────────── */
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), #4f46e5);
-  box-shadow: 0 4px 20px var(--glow-indigo);
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  box-shadow: 0 4px 24px rgba(161,161,170,0.3);
   transition: box-shadow 0.3s, transform 0.2s;
 }
 .btn-primary:hover {
-  box-shadow: 0 6px 28px var(--glow-indigo);
+  box-shadow: 0 6px 32px rgba(161,161,170,0.4);
   transform: translateY(-2px);
 }
 
@@ -471,12 +469,12 @@ rame
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 .card:hover {
-  border-color: rgba(99,102,241,0.35);
-  box-shadow: 0 12px 40px rgba(99,102,241,0.12);
+  border-color: rgba(161,161,170,0.35);
+  box-shadow: 0 12px 40px rgba(161,161,170,0.12);
   transform: translateY(-3px);
 }
 .dark .card:hover {
-  box-shadow: 0 12px 40px rgba(99,102,241,0.22);
+  box-shadow: 0 12px 40px rgba(161,161,170,0.22);
 }
 
 /* ── Glow card (about) ──────────────────────────────────────────────────────── */
@@ -484,11 +482,11 @@ rame
   transition: all 0.35s cubic-bezier(.22,1,.36,1);
 }
 .card-glow:hover {
-  box-shadow: 0 8px 32px rgba(99,102,241,0.15);
+  box-shadow: 0 8px 32px rgba(161,161,170,0.15);
   transform: translateY(-3px);
 }
 .dark .card-glow:hover {
-  box-shadow: 0 8px 40px rgba(99,102,241,0.28);
+  box-shadow: 0 8px 40px rgba(161,161,170,0.28);
 }
 
 /* ── Tech carousel ──────────────────────────────────────────────────────────── */
@@ -543,12 +541,12 @@ rame
               transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .exp-card:hover {
-  border-color: rgba(99,102,241,0.35);
-  box-shadow: 0 10px 30px rgba(99,102,241,0.12);
+  border-color: rgba(161,161,170,0.35);
+  box-shadow: 0 10px 30px rgba(161,161,170,0.12);
   transform: translateY(-3px);
 }
 .dark .exp-card:hover {
-  box-shadow: 0 10px 30px rgba(99,102,241,0.22);
+  box-shadow: 0 10px 30px rgba(161,161,170,0.22);
 }
 
 /* ── Skill pill hover ───────────────────────────────────────────────────────── */
@@ -556,9 +554,9 @@ rame
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .skill-pill:hover {
-  background: rgba(99,102,241,0.12) !important;
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
+  background: rgba(161,161,170,0.12) !important;
+  border-color: #a1a1aa !important;
+  color: #a1a1aa !important;
   transform: translateY(-1px);
 }
 
@@ -582,7 +580,7 @@ rame
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   pointer-events: auto;
-  background: rgba(99,102,241,0.2);
+  background: rgba(161,161,170,0.2);
 }
 
 .stack-item:hover .stack-label {
@@ -592,7 +590,7 @@ rame
 
 /* ── Project card thumbnail ─────────────────────────────────────────────────── */
 .project-thumb {
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e40af 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #27272a 50%, #18181b 100%);
   position: relative;
   overflow: hidden;
 }
@@ -600,7 +598,7 @@ rame
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(99,102,241,0.3) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(161,161,170,0.15) 0%, transparent 60%);
 }
 
 .project-carousel {
@@ -642,8 +640,8 @@ rame
 
 /* ── Achievement card year badge ────────────────────────────────────────────── */
 .year-badge {
-  background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(6,182,212,0.15));
-  border: 1px solid rgba(99,102,241,0.3);
+  background: linear-gradient(135deg, rgba(161,161,170,0.15), rgba(6,182,212,0.15));
+  border: 1px solid rgba(161,161,170,0.3);
   color: var(--accent);
 }
 
@@ -657,7 +655,7 @@ rame
 .form-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+  box-shadow: 0 0 0 3px rgba(161,161,170,0.15);
 }
 .form-input::placeholder { color: var(--text-2); }
 
@@ -666,9 +664,9 @@ rame
   transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .social-btn:hover {
-  background: rgba(99,102,241,0.15);
-  border-color: var(--accent);
-  color: var(--accent);
+  background: rgba(161,161,170,0.15);
+  border-color: #a1a1aa;
+  color: #a1a1aa;
   transform: translateY(-2px);
 }
 
@@ -694,7 +692,10 @@ rame
 :root:not(.dark) [class*="bg-[#0a0f1e]"]   { background-color: #f1f5f9 !important; }
 :root:not(.dark) [class*="bg-[#0f1630]"],
 :root:not(.dark) [class*="bg-[#0d1117]"],
-:root:not(.dark) [class*="bg-[#161b27]"]    { background-color: #ffffff !important; }
+:root:not(.dark) [class*="bg-[#161b27]"],
+:root:not(.dark) [class*="bg-[#0a0a0a]"],
+:root:not(.dark) [class*="bg-[#141414]"],
+:root:not(.dark) [class*="bg-[#050505]"]   { background-color: #ffffff !important; }
 :root:not(.dark) [class*="text-[#e8efff]"]  { color: #0f172a !important; }
 :root:not(.dark) [class*="text-[#8892a4]"]  { color: #64748b !important; }
 :root:not(.dark) [class*="border-white/[0.08]"],
@@ -722,10 +723,10 @@ rame
 /* ── Hero grid dots background ──────────────────────────────────────────────── */
 .hero-grid {
   background-image:
-    radial-gradient(circle, rgba(99,102,241,0.30) 1px, transparent 1px);
+    radial-gradient(circle, rgba(161,161,170,0.30) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 .dark .hero-grid {
   background-image:
-    radial-gradient(circle, rgba(99,102,241,0.08) 1px, transparent 1px);
+    radial-gradient(circle, rgba(161,161,170,0.12) 1px, transparent 1px);
 }

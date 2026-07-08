@@ -23,6 +23,7 @@ import {
 import { CircleStackIcon as CircleStackSolid } from '@heroicons/react/24/solid'
 import { Squares2X2Icon as Squares2X2Solid } from '@heroicons/react/24/solid'
 import { Analytics } from '@vercel/analytics/react'
+import CursorFollower from './CursorFollower'
 import './App.css'
 
 // ─── Skills Data ───────────────────────────────────────────────────────────────
@@ -381,7 +382,7 @@ function ProjectCard({ project, index }) {
                 src={src}
                 alt={`${project.title} preview ${idx + 1}`}
                 loading="lazy"
-                className={`absolute inset-0 w-full h-full object-contain bg-[#0b1020] transition-opacity duration-500 ${idx === current ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute inset-0 w-full h-full object-contain bg-[#050505] transition-opacity duration-500 ${idx === current ? 'opacity-100' : 'opacity-0'}`}
               />
             ))}
 
@@ -597,8 +598,7 @@ export default function App() {
 
       {/* ── HERO ── */}
       <section id="home" className="hero-section relative min-h-screen flex flex-col justify-center pt-24 sm:pt-20 overflow-hidden bg-[var(--surface-2)] hero-grid noise">
-        <div className="hero-blob hero-blob-1"/>
-        <div className="hero-blob hero-blob-2"/>
+
 
         <div className="floating-icons-bg">
           {floatingIcons.map((icon, i) => (
@@ -623,7 +623,7 @@ export default function App() {
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-2 items-center gap-14">
           {/* Left */}
           <div>
-            <div className="reveal delay-1 open-to-work inline-flex items-center gap-2 bg-[rgba(99,102,241,0.1)] border border-[rgba(99,102,241,0.25)] text-[var(--accent)] text-xs font-bold px-4 py-1.5 rounded-full mb-6 font-mono tracking-wide">
+            <div className="reveal delay-1 open-to-work inline-flex items-center gap-2 bg-[rgba(161,161,170,0.1)] border border-[rgba(161,161,170,0.25)] text-[#a1a1aa] text-xs font-bold px-4 py-1.5 rounded-full mb-6 font-mono tracking-wide">
               <SparklesIcon className="w-3.5 h-3.5"/> Open to work
             </div>
             <h1 className="font-title reveal delay-2 text-5xl lg:text-7xl font-extrabold leading-[1.05] mb-3">
@@ -664,8 +664,8 @@ export default function App() {
           </div>
 
           {/* Code card */}
-          <div className="reveal reveal-right code-card bg-[#0d1117] rounded-2xl overflow-hidden shadow-2xl">
-            <div className={`flex items-center justify-between px-4 py-3 ${isDark ? 'bg-[#161b27]' : 'bg-gray-100'} border-b border-white/[0.06]`}>
+          <div className="reveal reveal-right code-card bg-[#0a0a0a] rounded-2xl overflow-hidden shadow-2xl">
+            <div className={`flex items-center justify-between px-4 py-3 ${isDark ? 'bg-[#141414]' : 'bg-gray-100'} border-b border-white/[0.08]`}>
               <div className="flex gap-[6px]">
                 <span className="w-3 h-3 rounded-full bg-[#ff5f57]"/>
                 <span className="w-3 h-3 rounded-full bg-[#ffbd2e]"/>
@@ -689,8 +689,7 @@ export default function App() {
 
       {/* ── ABOUT ── */}
       <section id="about" className="relative min-h-screen flex flex-col justify-center pt-24 pb-20 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
-        <div className="hero-blob hero-blob-3"/>
-        <div className="hero-blob hero-blob-4"/>
+
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
@@ -851,8 +850,7 @@ export default function App() {
 
       {/* ── PROJECTS ── */}
       <section id="projects" className="relative min-h-screen flex flex-col justify-center py-24 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
-        <div className="hero-blob hero-blob-1"/>
-        <div className="hero-blob hero-blob-4"/>
+
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
@@ -874,8 +872,7 @@ export default function App() {
 
       {/* ── SKILLS ── */}
       <section id="skills" className="relative flex flex-col pt-24 pb-20 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
-        <div className="hero-blob hero-blob-3"/>
-        <div className="hero-blob hero-blob-2"/>
+
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
@@ -886,7 +883,7 @@ export default function App() {
           <div className="mx-auto w-full max-w-7xl">
             {/* Tabs */}
             <div className="reveal flex justify-center mb-10">
-              <div className="flex flex-wrap items-center justify-center gap-2 p-1 rounded-full border border-[var(--border)] bg-[rgba(99,102,241,0.06)]">
+              <div className="flex flex-wrap items-center justify-center gap-2 p-1 rounded-full border border-[var(--border)] bg-[rgba(161,161,170,0.06)]">
                 {skillsTabs.map(tab => {
                   const isActive = tab.key === skillsTab
                   return (
@@ -897,8 +894,8 @@ export default function App() {
                       className={
                         'px-3 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 ' +
                         (isActive
-                          ? 'bg-[rgba(99,102,241,0.18)] text-[var(--accent)] shadow-inner'
-                          : 'text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[rgba(99,102,241,0.08)]')
+                          ? 'bg-[rgba(161,161,170,0.18)] text-[#a1a1aa] shadow-inner'
+                          : 'text-[var(--text-2)] hover:text-[var(--text)] hover:bg-[rgba(161,161,170,0.08)]')
                       }
                     >
                       {tab.label}
@@ -922,7 +919,7 @@ export default function App() {
                           key={item.name}
                           className="skill-pill-animated inline-flex items-center justify-center gap-2.5 px-4 py-2.5 rounded-xl
                             border border-[var(--border)] bg-[var(--surface-2)]
-                            hover:border-[rgba(99,102,241,0.5)] hover:bg-[rgba(99,102,241,0.07)]
+                            hover:border-[rgba(161,161,170,0.4)] hover:bg-[rgba(161,161,170,0.07)]
                             hover:-translate-y-1 hover:shadow-lg
                             transition-all duration-200 cursor-default"
                           style={{ animationDelay: `${i * 45}ms` }}
@@ -948,7 +945,7 @@ export default function App() {
 
       {/* ── ACHIEVEMENTS ── */}
       <section id="achievements" className="relative min-h-screen flex flex-col justify-center pt-24 pb-20 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
-        <div className="hero-blob hero-blob-3"/>
+
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
@@ -984,8 +981,7 @@ export default function App() {
 
       {/* ── CONTACT ── */}
       <section id="contact" className="relative min-h-screen flex flex-col justify-center py-24 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
-        <div className="hero-blob hero-blob-4"/>
-        <div className="hero-blob hero-blob-2"/>
+
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6">
           <div className="reveal mb-12">
@@ -1063,7 +1059,7 @@ export default function App() {
 
       {/* ── FOOTER ── */}
       <footer className="relative border-t border-[var(--border)] py-8 bg-[var(--surface-2)] hero-grid noise overflow-hidden">
-        <div className="hero-blob hero-blob-footer"/>
+
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 flex flex-wrap justify-between items-center gap-3">
           <a href="#home" className="font-title font-extrabold gradient-text text-lg">TeDev</a>
           <p className="text-[var(--text-2)] text-sm">© 2026 Ted Paulo Feranil · Built with React + Tailwind</p>
@@ -1072,6 +1068,7 @@ export default function App() {
 
       {/* Scroll-to-top is now handled by the docked assistant orb (see IntroLoader). */}
 
+      <CursorFollower />
       <Analytics />
     </div>
   )
