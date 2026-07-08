@@ -373,7 +373,7 @@ function ProjectCard({ project, index }) {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[rgba(99,102,241,0.3)] to-transparent pointer-events-none"/>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-zinc-900/80 to-transparent pointer-events-none"/>
         {count ? (
           <>
             {images.map((src, idx) => (
@@ -434,7 +434,7 @@ function ProjectCard({ project, index }) {
         <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.stack.map(s => (
-            <span key={s} className="skill-pill bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.15)] text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
+            <span key={s} className="skill-pill bg-zinc-900 border border-zinc-700 text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
               {s}
             </span>
           ))}
@@ -486,7 +486,11 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
+    document.documentElement.classList.add('theme-transitioning')
     document.documentElement.classList.toggle('dark', isDark)
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      document.documentElement.classList.remove('theme-transitioning')
+    }))
   }, [isDark])
 
   useEffect(() => {
@@ -550,7 +554,9 @@ export default function App() {
               aria-label="Toggle theme"
               className="w-9 h-9 rounded-lg flex items-center justify-center text-[var(--text-2)] hover:text-[#a1a1aa] hover:bg-[rgba(161,161,170,0.1)] transition-all"
             >
-              {isDark ? <SunIcon className="w-5 h-5"/> : <MoonIcon className="w-5 h-5"/>}
+              <span key={isDark ? 'sun' : 'moon'} className="theme-icon-wrap">
+                {isDark ? <SunIcon className="w-5 h-5"/> : <MoonIcon className="w-5 h-5"/>}
+              </span>
             </button>
             <a
               href="/Ted Paulo Feranil-Resume.pdf"
@@ -713,7 +719,7 @@ export default function App() {
               {/* Bio */}
               <div className="reveal">
                 <div className="flex items-center gap-2 text-sm font-bold mb-3 text-[var(--text)]">
-                  <UserIcon className="w-4 h-4 text-[var(--accent)]"/> Bio
+                  <UserIcon className="w-4 h-4 text-[#a1a1aa]"/> Bio
                 </div>
                 <p className="text-[var(--text-2)] leading-relaxed max-w-3xl text-base">
                   An Innovative BS Computer Engineering student with focus on Machine Learning and AI, passionate about developing
@@ -726,8 +732,8 @@ export default function App() {
               <div className="about-card-education exp-card reveal p-6">
                 <div className="flex items-start justify-between mb-5">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[rgba(99,102,241,0.12)] flex items-center justify-center">
-                      <AcademicCapIcon className="w-5 h-5 text-[var(--accent)]"/>
+                    <div className="w-10 h-10 rounded-xl bg-[rgba(161,161,170,0.12)] flex items-center justify-center">
+                      <AcademicCapIcon className="w-5 h-5 text-[#a1a1aa]"/>
                     </div>
                     <h3 className="font-title font-bold text-[var(--text)]">Education</h3>
                   </div>
@@ -737,7 +743,7 @@ export default function App() {
                 <p className="text-[var(--text-2)] text-xs font-mono mb-4">2022 – 2026</p>
                 <div className="flex flex-wrap gap-2">
                   {['Software Engineering','Data Science','AI/ML'].map(tag => (
-                    <span key={tag} className="skill-pill text-xs bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] text-[var(--accent)] px-3 py-1 rounded-full">
+                    <span key={tag} className="skill-pill text-xs bg-[rgba(161,161,170,0.08)] border border-[rgba(161,161,170,0.2)] text-[#a1a1aa] px-3 py-1 rounded-full">
                       {tag}
                     </span>
                   ))}
@@ -754,19 +760,19 @@ export default function App() {
                 </div>
                 <div className="relative">
                   {/* vertical rail */}
-                  <span aria-hidden="true" className="absolute left-[13px] top-4 bottom-4 w-[2px] rounded-full bg-gradient-to-b from-[var(--accent)] via-[var(--accent-2)] to-transparent"/>
+                  <span aria-hidden="true" className="absolute left-[13px] top-4 bottom-4 w-[2px] rounded-full bg-gradient-to-b from-[#a1a1aa] via-[#71717a] to-transparent"/>
                   <div className="space-y-5">
                     {experienceData.map((exp, idx) => (
                       <div key={idx} className="exp-item group relative pl-10">
                         {/* connector line: draws from node → card on hover */}
                         <span
                           aria-hidden="true"
-                          className="absolute left-[20px] top-[26px] w-[20px] h-[2px] rounded-full bg-[var(--accent)] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                          className="absolute left-[20px] top-[26px] w-[20px] h-[2px] rounded-full bg-[#a1a1aa] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                         />
                         {/* timeline node (hollow, fills on hover) */}
                         <span
                           aria-hidden="true"
-                          className="absolute left-[7px] top-5 w-3.5 h-3.5 rounded-full border-2 bg-[var(--surface-2)] border-[var(--text-2)] group-hover:bg-[var(--accent)] group-hover:border-[var(--accent)] group-hover:scale-125 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                          className="absolute left-[7px] top-5 w-3.5 h-3.5 rounded-full border-2 bg-[var(--surface-2)] border-[var(--text-2)] group-hover:bg-[#a1a1aa] group-hover:border-[#a1a1aa] group-hover:scale-125 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                         />
                         {/* entry card */}
                         <div className="exp-card px-5 py-4">
@@ -778,7 +784,7 @@ export default function App() {
                           <ul className="space-y-1.5">
                             {exp.highlights.map((h, i) => (
                               <li key={i} className="text-sm text-[var(--text-2)] flex items-start gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-[7px] flex-shrink-0"/>
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#a1a1aa] mt-[7px] flex-shrink-0"/>
                                 <span>{h}</span>
                               </li>
                             ))}
