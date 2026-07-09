@@ -435,7 +435,7 @@ function ProjectCard({ project, index }) {
         <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.stack.map(s => (
-            <span key={s} className="skill-pill bg-zinc-200 dark:bg-zinc-900 border border-zinc-700 text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
+            <span key={s} className="skill-pill bg-zinc-200 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
               {s}
             </span>
           ))}

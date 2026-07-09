@@ -742,7 +742,7 @@ a, button, input, textarea, select, [role="button"] { cursor: auto; }
 /* ── Hero grid dots background ──────────────────────────────────────────────── */
 .hero-grid {
   background-image:
-    radial-gradient(circle, rgba(161,161,170,0.30) 1px, transparent 1px);
+    radial-gradient(circle, rgba(126, 126, 139, 0.3) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 .dark .hero-grid {
