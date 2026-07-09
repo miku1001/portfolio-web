@@ -118,7 +118,16 @@ export default function IntroLoader() {
           className={`intro-overlay intro-overlay--${phase}`}
           style={{ '--intro-dock': `${T_DOCK}ms` }}
         >
-          <div className="intro-greet">
+          <div className="flex flex-col items-center gap-6">
+            <video
+              src="/avatar.webm"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-[180px] h-[180px] rounded-full object-cover shadow-2xl"
+            />
+            <div className="intro-greet" style={{ position: 'static', transform: 'none' }}>
             <p className="intro-greeting">
               <span>{GREETING.slice(0, typed)}</span>
               <span className="intro-cursor" aria-hidden="true" />
@@ -150,6 +159,7 @@ export default function IntroLoader() {
           <button type="button" className="intro-skip" onClick={finish}>
             Skip
           </button>
+          </div>
         </div>
       )}
     </>,

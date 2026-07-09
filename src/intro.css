@@ -18,7 +18,7 @@
 .intro-greet {
   position: absolute;
   left: 50%;
-  top: calc(50% + 84px);
+  top: calc(50% + 120px);
   transform: translateX(-50%);
   width: max-content;
   max-width: 90vw;
