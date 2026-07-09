@@ -76,11 +76,14 @@ html.theme-transitioning *::after {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #a1a1aa;
+  background: #52525b;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
+}
+.dark .cursor-follower-core {
+  background: #a1a1aa;
 }
 
 .cursor-follower-ring {
@@ -88,12 +91,15 @@ html.theme-transitioning *::after {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1px solid #a1a1aa;
+  border: 1px solid #52525b;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) scale(0.8);
   opacity: 1;
   animation: cursorRingPulse 3.5s ease-in-out infinite;
+}
+.dark .cursor-follower-ring {
+  border-color: #a1a1aa;
 }
 
 .cursor-follower-suck {
