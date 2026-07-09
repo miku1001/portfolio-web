@@ -435,7 +435,7 @@ function ProjectCard({ project, index }) {
         <p className="text-[var(--text-2)] text-sm leading-relaxed flex-1">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.stack.map(s => (
-            <span key={s} className="skill-pill bg-zinc-900 border border-zinc-700 text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
+            <span key={s} className="skill-pill bg-zinc-200 dark:bg-zinc-900 border border-zinc-700 text-[var(--text-2)] font-mono text-[11px] px-3 py-1 rounded-full">
               {s}
             </span>
           ))}
@@ -746,7 +746,7 @@ export default function App() {
                 <p className="text-[var(--text-2)] text-xs font-mono mb-4">2022 – 2026</p>
                 <div className="flex flex-wrap gap-2">
                   {['Software Engineering','Data Science','AI/ML'].map(tag => (
-                    <span key={tag} className="skill-pill text-xs bg-[rgba(161,161,170,0.08)] border border-[rgba(161,161,170,0.2)] text-[#a1a1aa] px-3 py-1 rounded-full">
+                    <span key={tag} className="skill-pill text-xs bg-[rgba(161,161,170,0.08)] border border-zinc-700 dark:border-[rgba(161,161,170,0.2)] px-3 py-1 rounded-full text-zinc-700 dark:text-[#a1a1aa]">
                       {tag}
                     </span>
                   ))}
