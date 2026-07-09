@@ -24,6 +24,7 @@ import { CircleStackIcon as CircleStackSolid } from '@heroicons/react/24/solid'
 import { Squares2X2Icon as Squares2X2Solid } from '@heroicons/react/24/solid'
 import { Analytics } from '@vercel/analytics/react'
 import CursorFollower from './CursorFollower'
+import ChatBot from './ChatBot'
 import './App.css'
 
 // ─── Skills Data ───────────────────────────────────────────────────────────────
@@ -1089,6 +1090,7 @@ export default function App() {
       {/* Scroll-to-top is now handled by the docked assistant orb (see IntroLoader). */}
 
       <CursorFollower />
+      <ChatBot />
       <Analytics />
     </div>
   )
