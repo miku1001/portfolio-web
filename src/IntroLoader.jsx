@@ -12,7 +12,7 @@ const STATUS_CONNECTED = 'Ready'
 const ORB_SIZE_LOADER = 120
 
 const T_BOOT = 800
-const T_GREET = 2400
+const T_GREET = 2800
 const T_DOCK = 1800
 const TYPE_INTERVAL = Math.max(20, Math.floor(T_GREET / (GREETING.length + 2)))
 
@@ -125,7 +125,7 @@ export default function IntroLoader() {
               loop
               muted
               playsInline
-              className="w-[180px] h-[180px] rounded-full object-cover shadow-2xl"
+              className="w-[240px] h-[240px] rounded-full object-cover shadow-2xl dark:border border-white bg-zinc-50/40"
             />
             <div className="intro-greet" style={{ position: 'static', transform: 'none' }}>
             <p className="intro-greeting">

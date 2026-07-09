@@ -128,7 +128,7 @@ export default function ChatBot() {
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="fixed bottom-6 right-6 z-[110] w-16 h-16 rounded-full shadow-2xl hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden border-2 border-[var(--accent-2)]"
+        className="fixed bottom-6 right-6 z-[110] w-20 h-20 rounded-full bg-zinc-100/30 shadow-2xl hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden border border-black"
       >
         <video
           src="/avatar.webm"
