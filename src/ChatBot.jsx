@@ -130,9 +130,12 @@ export default function ChatBot() {
         onClick={() => setOpen(o => !o)}
         className="fixed bottom-6 right-6 z-[110] w-16 h-16 rounded-full shadow-2xl hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden border-2 border-[var(--accent-2)]"
       >
-        <img
-          src="/botbot.gif"
-          alt="BotBot"
+        <video
+          src="/avatar.webm"
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
         />
       </button>
