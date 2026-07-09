@@ -543,12 +543,14 @@ export default function App() {
             </button>
             <a href="#home" className="font-title text-xl font-black gradient-text tracking-wide">TeDev</a>
           </div>
-          <div className="flex items-center gap-3">
-            <nav className="hidden md:flex items-center gap-7 pr-7">
+          <div className="flex-1 flex justify-center">
+            <nav className="hidden md:flex items-center gap-7">
               {['Home','About','Projects','Skills','Achievements','Contact'].map(link => (
                 <a key={link} href={`#${link.toLowerCase()}`} className="nav-link">{link}</a>
               ))}
             </nav>
+          </div>
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setIsDark(p => !p)}
               aria-label="Toggle theme"
