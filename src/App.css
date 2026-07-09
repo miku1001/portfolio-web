@@ -404,7 +404,7 @@ a, button, input, textarea, select, [role="button"] { cursor: auto; }
 /* ── Nav link hover underline ───────────────────────────────────────────────── */
 .nav-link {
   position: relative;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-2);
   transition: color 0.2s;
