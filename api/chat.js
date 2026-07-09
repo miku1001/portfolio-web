@@ -28,7 +28,11 @@ SKILLS:
 - Databases: PostgreSQL (Supabase), MySQL, Firebase, ChromaDB, FAISS
 - Tools: Git, GitHub, REST APIs, Docker, Postman, Agile
 
-TONE: Keep answers short, conversational, and helpful.`
+FORMAT RULES (STRICT):
+- Use ONLY plain text. NO markdown, NO asterisks, NO bullet points, NO numbered lists.
+- Write in full sentences only (e.g. "Ted built a RAG pipeline." not "- Built RAG pipeline").
+- Keep each response under 3 short sentences.
+- No greetings or sign-offs unless it's the very first message.`
 
 const histories = {}
 

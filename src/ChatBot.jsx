@@ -3,6 +3,17 @@ import { PaperAirplaneIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const IS_DEV = import.meta.env.DEV
 
+function cleanReply(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/__(.*?)__/g, '$1')
+    .replace(/`(.*?)`/g, '$1')
+    .replace(/^[-*]\s/gm, '')
+    .replace(/^\d+\.\s/gm, '')
+    .replace(/\n{2,}/g, '\n')
+    .trim()
+}
+
 export default function ChatBot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
@@ -41,7 +52,7 @@ export default function ChatBot() {
         body: JSON.stringify({ message: text, sessionId: sessionId.current }),
       })
       const data = await res.json()
-      setMessages(prev => [...prev, { role: 'assistant', text: data.reply || 'Sorry, I could not process that.' }])
+      setMessages(prev => [...prev, { role: 'assistant', text: cleanReply(data.reply) || 'Sorry, I could not process that.' }])
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', text: 'Oops! Something went wrong. Try again later.' }])
     } finally {
