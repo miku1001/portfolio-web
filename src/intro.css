@@ -6,8 +6,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface-2);
+  background-color: var(--surface-2);
+  background-image:
+    radial-gradient(circle, rgba(161,161,170,0.30) 1px, transparent 1px);
+  background-size: 32px 32px;
   transition: opacity var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dark .intro-overlay {
+  background-image:
+    radial-gradient(circle, rgba(161,161,170,0.12) 1px, transparent 1px);
 }
 .intro-overlay--dock {
   opacity: 0;
