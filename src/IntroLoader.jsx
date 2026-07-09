@@ -11,9 +11,9 @@ const STATUS_CONNECTED = 'Ready'
 
 const ORB_SIZE_LOADER = 120
 
-const T_BOOT = 800
-const T_GREET = 2800
-const T_DOCK = 1800
+const T_BOOT = 1000
+const T_GREET = 3000
+const T_DOCK = 3000
 const TYPE_INTERVAL = Math.max(20, Math.floor(T_GREET / (GREETING.length + 2)))
 
 const safeGet = (k) => { try { return PERSIST?.getItem(k) } catch { return null } }
