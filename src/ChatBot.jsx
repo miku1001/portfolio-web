@@ -3,6 +3,18 @@ import { PaperAirplaneIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const IS_DEV = import.meta.env.DEV
 
+function useDocking() {
+  const [docking, setDocking] = useState(false)
+  useEffect(() => {
+    const check = () => setDocking(document.body.classList.contains('is-docking'))
+    check()
+    const obs = new MutationObserver(check)
+    obs.observe(document.body, { attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
+  }, [])
+  return docking
+}
+
 function cleanReply(text) {
   return text
     .replace(/\*\*(.*?)\*\*/g, '$1')
@@ -15,6 +27,7 @@ function cleanReply(text) {
 }
 
 export default function ChatBot() {
+  const docking = useDocking()
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
     { role: 'assistant', text: 'Hey! I\'m BotBot, Ted\'s portfolio assistant. Ask me anything about Ted!' },
@@ -136,20 +149,22 @@ export default function ChatBot() {
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen(o => !o)}
-        className="fixed bottom-6 right-6 z-[110] w-20 h-20 rounded-full bg-zinc-100/30 shadow-2xl hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden border border-black"
-      >
-        <video
-          src="/avatar.webm"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        />
-      </button>
+      {!docking && (
+        <button
+          type="button"
+          onClick={() => setOpen(o => !o)}
+          className="fixed bottom-6 right-6 z-[110] w-20 h-20 rounded-full bg-zinc-100/30 shadow-2xl hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden border border-black"
+        >
+          <video
+            src="/avatar.webm"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        </button>
+      )}
     </>
   )
 }

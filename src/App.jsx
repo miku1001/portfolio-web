@@ -1087,8 +1087,6 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Scroll-to-top is now handled by the docked assistant orb (see IntroLoader). */}
-
       <CursorFollower />
       <ChatBot />
       <Analytics />

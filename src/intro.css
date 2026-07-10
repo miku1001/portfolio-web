@@ -25,7 +25,7 @@
 .intro-greet {
   position: absolute;
   left: 50%;
-  top: calc(50% + 120px);
+  top: calc(50% + 144px);
   transform: translateX(-50%);
   width: max-content;
   max-width: 90vw;
@@ -95,7 +95,7 @@
   bottom: 26px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 101;
+  z-index: 112;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
