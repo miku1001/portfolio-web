@@ -51,7 +51,6 @@ export default function IntroLoader() {
   const [typed, setTyped] = useState(animate ? 0 : GREETING.length)
   const finishedRef = useRef(false)
   const timersRef = useRef([])
-  const avatarRef = useRef(null)
 
   const finish = useCallback(() => {
     if (finishedRef.current) return
@@ -76,6 +75,7 @@ export default function IntroLoader() {
       setTimeout(() => {
         if (finishedRef.current) return
         setPhase('dock')
+        document.body.classList.add('is-docking')
         revealRootScale()
       }, T_BOOT + T_GREET),
       setTimeout(finish, T_BOOT + T_GREET + T_DOCK),
@@ -108,38 +108,6 @@ export default function IntroLoader() {
     }
   }, [phase, finish])
 
-  useEffect(() => {
-    if (phase !== 'dock' || !animate) return
-    const el = avatarRef.current
-    if (!el) return
-
-    document.body.classList.add('is-docking')
-
-    const rect = el.getBoundingClientRect()
-
-    el.style.setProperty('position', 'fixed')
-    el.style.setProperty('left', rect.left + 'px')
-    el.style.setProperty('top', rect.top + 'px')
-    el.style.setProperty('width', rect.width + 'px')
-    el.style.setProperty('height', rect.height + 'px')
-    el.style.setProperty('margin', '0')
-    el.style.setProperty('z-index', '111')
-    el.style.setProperty('border-radius', '9999px')
-    el.style.setProperty('overflow', 'hidden')
-    el.style.setProperty('box-shadow', '0 25px 50px -12px rgba(0,0,0,0.25)')
-
-    void el.offsetWidth
-
-    const targetSize = 80
-    const gap = 24
-
-    el.style.setProperty('transition', `all ${T_DOCK}ms cubic-bezier(0.22, 1, 0.36, 1)`)
-    el.style.setProperty('left', (window.innerWidth - targetSize - gap) + 'px')
-    el.style.setProperty('top', (window.innerHeight - targetSize - gap) + 'px')
-    el.style.setProperty('width', targetSize + 'px')
-    el.style.setProperty('height', targetSize + 'px')
-  }, [phase, animate])
-
   const intro = phase !== 'idle'
   const connected = phase === 'dock'
 
@@ -147,16 +115,8 @@ export default function IntroLoader() {
     <>
       {intro && (
         <div
-          ref={avatarRef}
-          className="z-[111] overflow-hidden rounded-full shadow-2xl bg-zinc-800"
-          style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '240px',
-            height: '240px',
-          }}
+          className={`intro-avatar${phase === 'dock' ? ' intro-avatar--dock' : ''}`}
+          style={{ '--intro-dock': `${T_DOCK}ms` }}
         >
           <video
             src="/avatar.webm"

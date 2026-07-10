@@ -1,3 +1,33 @@
+/* Avatar fly transition */
+.intro-avatar {
+  position: fixed;
+  z-index: 111;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  background: rgba(244,244,245,0.4);
+  /* Centered: top-left corner at 50% - 120px */
+  left: calc(50% - 120px);
+  top: calc(50% - 120px);
+  width: 240px;
+  height: 240px;
+  transition:
+    left var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    top var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    width var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    height var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1),
+    border-color var(--intro-dock, 800ms) cubic-bezier(0.22, 1, 0.36, 1);
+}
+.intro-avatar--dock {
+  /* Corner: top-left at 100% - 104px = right: 24px, bottom: 24px */
+  left: calc(100% - 104px);
+  top: calc(100% - 104px);
+  width: 80px;
+  height: 80px;
+  border-color: rgba(0,0,0,0.8);
+}
+
 /* Full-screen overlay */
 .intro-overlay {
   position: fixed;
@@ -120,4 +150,12 @@
   .intro-greet { transition: opacity 150ms linear; }
   .intro-status__spinner { animation: none; }
   .intro-cursor { animation: none; opacity: 1; }
+  .intro-avatar {
+    transition:
+      left 150ms linear,
+      top 150ms linear,
+      width 150ms linear,
+      height 150ms linear,
+      border-color 150ms linear;
+  }
 }
